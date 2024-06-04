@@ -1,0 +1,118 @@
+*{
+    margin: 0; 
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body{
+    background-color: aquamarine;
+    
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* In der Mitte des Bildschirms ausrichten */
+    align-items: center;
+    border-style: dashed;
+
+    min-height: 1600px; 
+}
+
+/* ************************************* */
+/* ************** Header  ************** */
+/* ************************************* */
+
+header{
+    display: flex;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* ************************************* */
+/* ***** general Information block ***** */
+/* ************************************* */
+
+.general-information{
+    background-color: blueviolet;
+    width: 80vw;
+    height: 500px;
+    border: dotted; 
+    gap: 20px;
+    /* grid settings*/
+
+    display: grid; 
+    grid-template-areas: 
+        'picture-left picture-mid picture-right'
+        'picture-left headline headline'
+        'picture-left paragraph paragraph';
+}
+.left-picture-general-info{
+    /*grid settings */
+    grid-area: picture-left;
+    background-color: blueviolet;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+.mid-picture-general-info{
+    /*grid settings */
+    grid-area: picture-mid;
+    background-color: brown;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+
+.right-picture-general-info{
+    /*grid settings */
+    grid-area: picture-right;
+    background-color: aqua;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+.headline-general-info{
+    grid-area: headline; 
+
+}
+.paragraph-general-info{
+    grid-area: paragraph; 
+}
+
+
+/* ************************************* */
+/* ** Ausstattung & Zimmergestalltung ** */
+/* ************************************* */
+
+.equipment{
+    border: dashed;
+}
+
+.container-equipment{
+    /*grid settings */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    width: 80vw;
+    gap: 20px; 
+    padding: 24px;
+}
+.equipment-item1{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: auto;  
+}
+.pictogram{
+    width: 20px;
+    height: 10px;
+    height: auto; 
+}
+

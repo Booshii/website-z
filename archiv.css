@@ -1,0 +1,231 @@
+
+body{
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center; */
+    
+    /* align-content: space-around; */
+    
+    /* kann eigentlich weg */
+    /* min-height: 100vh; 
+    min-width: 100vw;  */
+
+    
+}
+header{
+    /* display: flex; */
+    /* flex settings */  
+    border-style: dashed;
+
+    /*content */ 
+    justify-content: space-between;
+    height: auto; 
+
+
+}
+nav{
+    /* flex settings */ 
+    /* height: auto;  */
+    border-style: dashed;
+
+
+    /*content*/
+    /* height: auto;   */
+}
+main{
+    /* flex settings */ 
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    /* flex: auto;  */
+    border-style: dashed;
+
+    width: 80vw; 
+   
+
+
+    background-color: blue;
+}
+footer{
+    /* flex settings */ 
+    border-style: dashed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+/* sections form main in order top to buttom*/ 
+
+.general-information{
+    /* grid settings*/
+
+    display: grid; 
+    /* grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
+
+    grid-template-areas: 
+        'picture-left picture-mid picture-right'
+        'picture-left headline headline'
+        'picture-left paragraph paragraph';
+
+    border: dotted; 
+
+}
+
+.left-picture-general-info{
+    /*grid settings */
+    grid-area: picture-left;
+    background-color: blueviolet;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+.mid-picture-general-info{
+    /*grid settings */
+    grid-area: picture-mid;
+    background-color: brown;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+
+.right-picture-general-info{
+    /*grid settings */
+    grid-area: picture-right;
+    background-color: aqua;
+
+    /*general settings*/
+    border: dotted;
+    width: 100%;
+    height: 100%
+}
+.headline-general-info{
+    grid-area: headline; 
+
+}
+.paragraph-general-info{
+    grid-area: paragraph; 
+}
+
+/*Ausstattung & Zimmergestalltung */
+
+.container-equipment{
+    /*grid settings */
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+
+    
+
+}
+.equipment-item1{
+    display: flex;
+    border: dotted; 
+
+     width: 100%;
+    height: auto;  
+}
+.pictogram{
+    width: 100%;
+    height: auto; 
+}
+
+/* .header{
+    position: relative; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    padding: 20px 100px; 
+    background: green;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-size: 32px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px; 
+
+}
+
+.navbar a::before{
+    content: '';
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    width: 0; 
+    height: 2px;
+    background: #fff; 
+    transition: .3s; 
+}
+.navbar a:hover::before {
+    width: 100%; 
+
+}
+main {
+    position: relative;
+    background-color: blueviolet;
+}
+.container-flex{
+    
+    display: grid;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+        'shiit shiit'
+        'main aside'
+        'footer footer';
+}
+.item-1{
+    grid-area: aside;
+    border-style: dashed;
+}
+.item-2{
+    grid-area: main;
+    border-style: dashed;
+}
+.item-3{
+    grid-area: shiit;
+    border-style: dashed;
+}
+.item-4{
+    grid-area: footer;
+    border-style: dashed;
+} */ 
