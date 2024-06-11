@@ -1,6 +1,4 @@
 *{
-    margin: 0; 
-    box-sizing: border-box;
     font-family: sans-serif;
 }
 body{
@@ -13,7 +11,7 @@ main{
     justify-content: space-around; /* In der Mitte des Bildschirms ausrichten */
     align-items: center;
     border-style: dashed;
-
+    background-color: blanchedalmond;
     min-height: 1600px; 
 }
 
@@ -23,22 +21,42 @@ main{
 
 header{
     display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 0 24px; 
+}
+.socials{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 180px;
 }
 nav{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    font-size: large;
 }
-
+nav a {
+    text-decoration: none;
+    color: inherit; /* Vererbt die Farbe von der übergeordneten Element */
+}
+nav a:hover{
+    background-color: #f0f0f0; /* Ändert die Hintergrundfarbe beim Hover */
+    border-radius: 5px;        /* Rundet die Ecken ab */
+}
 /* ************************************* */
 /* ***** general Information block ***** */
 /* ************************************* */
 
 .general-information{
     background-color: blueviolet;
-    width: 80vw;
+    width: 100%;
+    max-width: 1200px; 
     height: 500px;
     border: dotted; 
-    gap: 20px;
+    gap: 16px;
     /* grid settings*/
 
     display: grid; 
@@ -50,20 +68,14 @@ nav{
 .left-picture-general-info{
     /*grid settings */
     grid-area: picture-left;
-    background-color: blueviolet;
-
     /*general settings*/
-    border: dotted;
     width: 100%;
     height: 100%
 }
 .mid-picture-general-info{
     /*grid settings */
     grid-area: picture-mid;
-    background-color: brown;
-
     /*general settings*/
-    border: dotted;
     width: 100%;
     height: 100%
 }
@@ -71,10 +83,7 @@ nav{
 .right-picture-general-info{
     /*grid settings */
     grid-area: picture-right;
-    background-color: aqua;
-
     /*general settings*/
-    border: dotted;
     width: 100%;
     height: 100%
 }
@@ -93,6 +102,8 @@ nav{
 
 .equipment{
     border: dashed;
+    width: 100%;
+    max-width: 1200px; 
 }
 
 .container-equipment{
@@ -100,19 +111,100 @@ nav{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
     grid-template-rows: 1fr 1fr 1fr 1fr; 
-    width: 80vw;
+    width: 100%;
     gap: 20px; 
-    padding: 24px;
+    /* border: dashed; */
 }
 .equipment-item1{
     display: flex;
-    gap: 20px;
-    width: 100%;
+    gap: 40px;
+    padding: 0 40px;
     height: auto;  
+    /* border: dashed; */
 }
 .pictogram{
     width: 20px;
     height: 10px;
     height: auto; 
+}
+
+/* ************************************* */
+/* ************ Fotogalerie ************ */
+/* ************************************* */
+
+.picture-gallery{
+    width: 100%;
+    max-width: 1200px; 
+    border: dashed;
+}
+.container-pictures{
+    display: grid; 
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.container-pictures img{
+    width: 180px;
+    height: 180px;
+}
+/* ******** Dialog  Fotogalerie ******** */
+dialog{
+    border: none;
+    width: 100vw;
+    height: 100vh; 
+    background: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    color: white;
+}
+dialog[open] {
+    display: flex;
+}
+.modal-element-header{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    
+}
+
+#close-button {
+    position: absolute;
+    right: 20px;
+    /* transform: translateY(-50%); */
+} 
+
+#modal-element-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%; 
+}
+#modal-image{
+    max-height: 100%;
+}
+dialog button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    margin: 10px;
+    color: white;
+}
+
+/* #prevButton {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#nextButton {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
