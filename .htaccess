@@ -1,0 +1,4 @@
+# Activiert URL-Rewriting
+RewriteEngine On 
+
+# Leitet alles um, was nicht auf eine echte Datei oder einen echten Ordner
