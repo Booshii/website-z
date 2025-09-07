@@ -1,4 +1,5 @@
-document.getElementById("createForm").addEventListener("create", createEvent()); 
+const cButton = document.getElementById("createForm");
+
 
 function createEvent(){
     date = document.getElementById("date").value; 
@@ -21,3 +22,5 @@ function createEvent(){
     })
     .catch(error => console.error('Error:', error));
 };
+
+
