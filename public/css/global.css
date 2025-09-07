@@ -1,0 +1,12 @@
+:root {
+  --main-bg: #f0f0f0;
+  --primary: #007bff;
+  --color-success: #28a745; /* für Erfolgsmeldungen, freie Tage */
+  --color-error:   #dc3545; /* für Fehlermeldungen, belegte Tage */
+
+}
+
+body {
+  background-color: var(--main-bg);
+}
+

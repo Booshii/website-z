@@ -1,0 +1,137 @@
+/* .calendar-settings{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 40px; 
+} */
+/* .calendar-entry-form {
+    border-style: solid;
+    border-color: black;
+} */
+/* body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+} */
+body{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 25% auto;
+  grid-template-areas: 
+      'title title'
+      'select select'
+      'calendar form '
+      'legend form';
+
+  margin: 0px;
+  padding: 24px;
+}
+#title {
+  grid-area: title;
+  border: 1px solid black;
+}
+#dropdown-container {
+  grid-area: select;
+  border: 1px solid black;
+}
+#legend-container {
+  grid-area: legend;
+  border: 1px solid black;
+}
+
+/* ************************************* */
+/* ******** calendar-container ********* */
+/* ************************************* */
+#calendar-container {
+  grid-area: calendar;
+  border: 1px solid black;
+  /* max-width: 200px; */
+}
+#prev-month{
+  /* min-width: 80px; */
+}
+#select-month-year{
+
+}
+#next-month{
+
+
+}
+
+
+
+
+/* ************************************* */
+/* ********** form-container *********** */
+/* ************************************* */
+#form-container{
+  grid-area: form;
+  border: 1px solid black;
+  width: 100%; 
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 48px 2fr 4fr;
+  grid-auto-rows: 48px ;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#form-grid-description-and-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+
+  border: 1px solid black;
+}
+#form-grid-description-and-button-container button {
+  height: 20px;
+  border: 1px solid black;
+  align-self: flex-end;
+}
+/* #form-grid-description-and-button-container h2 {
+  /* border: 1px solid black; */
+  /* height: 20px; */
+
+
+.calendar-nav{
+    display: flex;
+    flex-direction: row;
+    width: 100%; 
+}
+
+select {
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  font: 1.5rem bold;
+  
+  width: 100%;
+}
+#status-label {
+  width: 30px;
+  height: 30px;
+}
+
+.square-red {
+  background-color: green;
+  width: 50px;
+  height: 50px;
+}
+.square-green{
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}
+.legend-item{
+  display: flex; 
+  flex-direction: row;
+}
+/* .legende.green{
+  display: flex; 
+  flex-direction: row;
+} */

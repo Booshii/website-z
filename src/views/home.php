@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/style.css">
 
     </head>
     <body>
@@ -139,8 +139,9 @@
                 <p>Wir freuen uns, wenn Sie Interesse an unserer Ferienwohnung haben. Um eine Buchung vorzunehmen schreiben Sie uns bitte eine E-Mail oder rufen Sie uns an</p>
             </section>
 
-            <section class="calenders">
-                
+            <section class="calendars">
+           
+
                 <table id="first-calendar-table" class="calenda">
                     <thead>
                         <tr>
@@ -299,5 +300,5 @@
     
     
 
-    <script src="main.js"></script>
+    <script src="/js/main.js"></script>
 </html>

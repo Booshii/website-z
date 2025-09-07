@@ -1,0 +1,22 @@
+.login-container{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+
+  border: 2px solid black;
+}
+#login-form{
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+input{
+  height: 40px;
+  width: 260px;
+}

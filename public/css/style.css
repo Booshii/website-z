@@ -200,7 +200,7 @@ dialog button {
 /* ************** Kalender ************* */
 /* ************************************* */
 
-.calenders{
+.calendars{
     display: flex;
     gap: 36px;
 }

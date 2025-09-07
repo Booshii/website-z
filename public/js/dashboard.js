@@ -1,26 +1,73 @@
-const cButton = document.getElementById("createForm");
+
+  /************* DOM-Elements ************** */
+  const select = document.getElementById('select-month-year');
+  const prevBtn = document.getElementById('prev-month');
+  const nextBtn = document.getElementById('next-month');
+  const selectFlat = document.getElementById('select-flat');
 
 
-function createEvent(){
-    date = document.getElementById("date").value; 
+  /*************** Functions *************** */
 
-    description = document.getElementById("description").value; 
-    // umschreiben und was bedeutet URLSearchParams
-    const data = new URLSearchParams();
-    data.append('date', date);
-    data.append('description', description);
-    fetch('../includes-SRC/functions.php', {
-        method: 'POST',
-        body: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Result:', data.result);
-    })
-    .catch(error => console.error('Error:', error));
-};
+  // redirect
+  function redirectTo(month, year, flat) {
+    window.location.href = `/dashboard?month=${month}&year=${year}&flat=${flat}`;
+  }
 
+  /************ EventListener ************** */
 
+  prevBtn.addEventListener('click', () => {
+    let [ month, year ] = select.value.split('-').map(Number);
+    month--;
+    if (month < 1) {
+      month = 12;
+      year--;
+    }
+  
+    const flat = parseInt(selectFlat.value); 
+    redirectTo(month, year, flat);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    let [ month, year ] = select.value.split('-').map(Number);
+    month++;
+    if (month > 12){
+      month = 1;
+      year++;
+    }
+
+    const flat = parseInt(selectFlat.value); 
+    redirectTo(month, year, flat);
+  });
+
+  select.addEventListener('change', () => {
+    const [ month, year ] = select.value.split('-').map(Number);
+    const flat = parseInt(selectFlat.value); 
+    redirectTo(month, year, flat);
+  });
+
+  selectFlat.addEventListener('change', () => {
+    const [ month, year ] = select.value.split('-').map(Number);
+    const flat = parseInt(selectFlat.value); 
+    redirectTo(month, year, flat);
+  });
+
+  // beim Laden alle Selects durchgehen 
+
+  var selects = document.querySelectorAll('select[id^="select-status_"]');
+
+  selects.forEach(select => {
+      // Event bei Änderungen 
+      select.addEventListener('change', () => {
+          const id = select.id.split('_').pop(); // splittet vor und nach _
+          // holt das zu der id zugehörige label
+          const label  = document.getElementById('status-label' + id); 
+
+          if (!label) return; 
+
+          if (select.value === 'true') {
+              label.style.background ='green';
+          } else {
+              label.style.background = 'red';
+          }
+      });
+  });

@@ -12,7 +12,7 @@ let currentIndex;
 /***********************************/
 /************ Kalender *************/
 /***********************************/
-const calenderBody = document.getElementById('calender-body'); 
+const calendarBody = document.getElementById('calendar-body'); 
 const currentDate = new Date(); 
 const month = currentDate.getMonth(); 
 const year = currentDate.getFullYear(); 
@@ -27,7 +27,7 @@ function firstDayOfMonth(month, year){
 }
 
 // beim Aufruf der Seite Kalender richtg laden 
-function loadCalender(current_date){
+function loadCalendar(current_date){
    
     // vom Datum die Anzahl der Tage des Monats
     const days = monthInDays(month, year); 
