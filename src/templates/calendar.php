@@ -53,7 +53,7 @@
                             $event_index++;
                         }
                     } else {
-                        echo '<td class="day-box spare">$current_day</td>';
+                        echo '<td class="day-box spare">',htmlspecialchars((string)$current_day, ENT_QUOTES, 'UTF-8'),'</td>';
                     }
                     $current_day++;   
                 }
@@ -64,8 +64,6 @@
         echo'
             </tbody>
         </table>';
-    
-
     }
 
     

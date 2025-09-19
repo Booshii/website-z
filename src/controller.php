@@ -26,7 +26,8 @@
 
         $calendar_events = $this->repository->getOneMonthCalendarEvents($displayed_year, $displayed_month, $displayed_flat);
         
-
+  
+        
         //*** Logik wenn man mehr mit Sessions arbetien will um Datenbank zugriffe zu reduzieren ***
         //**************************************************************************************** */
 
@@ -95,16 +96,6 @@
             header("Location: /dashboard?month={$month}&year={$year}&flat={$flat}", true);
             exit(); 
             break;
-
-          //****** Login Form ******/
-          case 'user_login': 
-            if (isset($_POST['email'], $_POST['password'])) {
-              $this->handleLogin(); 
-            } else {
-              echo json_encode(['error' => 'Fehler beim Login']);
-            }; 
-            
-            break;
         }
       }
 
@@ -131,26 +122,25 @@
       }
 
       public function handleLogin(){
-
         $errors = []; 
+        // hier wird gesorgt dass nie null weitergegeben wird sondern dann ''
+        $emailRaw = $_POST['email']   ?? '';
+        $passwordRaw = $_POST['password'] ?? '';
 
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL); 
-        $email = trim($email); 
-
-        $password = filter_input(INPUT_POST, 'password'); 
+        $email = trim((string)$emailRaw); 
+        $password = (string)$passwordRaw;
       
-
-        if (!$email) {
+        if ($email === '') {
           $errors[] = "Bitte E-Mail eingeben.";
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
           $errors[] = "Ungültiges E-Mail-Format.";
         }
-
-        if (empty($password)) {
+        
+        if ($password === '') {
           $errors[] = "Bitte Passwort eingeben.";
         }
 
-        if (!empty($errors)) {
+        if ($errors) {
           $this->renderLogin($errors);
           return;
         }
@@ -167,7 +157,7 @@
         //prüfen ob user leer 
         // if (empty($user_database))
 
-        if(!$user_database || !password_verify($password, $user_database['password_hash'])) {
+        if(!$user_database || !password_verify($password, $user_database['pwd'])) {
           $errors[] = "Ungültige Login-Daten. "; 
           $this->renderLogin($errors); 
           return; 

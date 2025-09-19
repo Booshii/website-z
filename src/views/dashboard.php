@@ -13,6 +13,14 @@
 <body>
     
     <h1 id="title">Kalender bearbeiten</h1>
+<?php
+	echo "<pre>"; 
+		print_r("hallo");
+	print_r($calendar_events); 
+
+	echo "</pre>"; 
+?>
+		
     <div id="dropdown-container">
         <select name="select-flat" id="select-flat">
             <option value="1"<?= $current_flat === 1 ? 'selected' : '' ?>>Wohnung 1</option>

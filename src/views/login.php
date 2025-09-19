@@ -1,6 +1,6 @@
-<!-- Diese View erhält: 
-	$errors (array)
--->
+<?php
+/** @var array<string> $errors */
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
   <div class="login-container">
 		<h1>Login</h1>
 <!-- Login-Formular -->
-		<form id="login-form" action="/controller" method="POST">
+		<form id="login-form" action="/login" method="POST">
 			<label for="email">Email</label>
 			<input type="email" id="email" name="email" placeholder="Email" required>
 
@@ -24,8 +24,8 @@
 			<input type="password" id="password" name="password" placeholder="Password" required>
 
 			<br>
-    	<button type="submit" name="submit_button" value="user_login">Login</button>
-  	</form>
+			<button type="submit" name="submit_button" value="user_login">Login</button>
+		</form>
 
 <!-- Anzeige von Fehlermeldungen, falls vorhanden -->
 		<?php if (isset($errors) && !empty($errors)): ?>
@@ -39,14 +39,6 @@
 			</ul>
 		<?php endif; ?>
   </div>
-
-
-
-
-
-
-
-
 
 </body>
 </html>
