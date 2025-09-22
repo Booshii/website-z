@@ -1,6 +1,11 @@
 :root {
   --main-bg: #f0f0f0;
   --primary: #007bff;
+
+
+/* color-scheme */
+  --color-secondary:#79A37D;
+
   --color-success: #28a745; /* für Erfolgsmeldungen, freie Tage */
   --color-error:   #dc3545; /* für Fehlermeldungen, belegte Tage */
 

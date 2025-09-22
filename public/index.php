@@ -6,9 +6,7 @@
 
     // $db = getDbConnection(); 
     // $router = new Router($db);
-    // $router->handleRequest(); 
-
-
+    // $router->handleRequest();
     //  stuff from tut 
 
     
@@ -23,9 +21,9 @@
     // show($URL); 
 
     // session_start(); 
-
+    require dirname(__DIR__) . '/bootstrap.php';
     
-    require_once "/var/www/html/website-z/src/core/App.php"; 
+    require_once CORE_PATH . "/App.php"; 
 
 
 

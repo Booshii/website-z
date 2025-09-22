@@ -57,8 +57,7 @@
             </div>
             <div id="calendar">
                 <?php
-                    error_reporting(E_ALL);
-                    ini_set('display_errors', 1);
+
                     // include '../includes-SRC/functions.php';
 
                     // aktuellen Monat und Jahr holen und dann die funktion renderCalendar aufrufen 
@@ -70,7 +69,7 @@
                     // speichern der Termine aus dem Backend in eine Liste 
                     // Form erstellen 
 
-                    include_once SRC_URL . '/templates/calendar.php';
+                    include_once SRC_PATH . '/templates/calendar.php';
                     renderCalendar($current_month, $current_year, $calendar_events); 
 
                     // echo '<pre>';

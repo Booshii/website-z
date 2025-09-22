@@ -66,10 +66,10 @@ class Router {
 
 	// GET Funktionen 
 	private function loadHomePage(){
-		require_once '/var/www/html/website-z/src/views/home.php';      
+		require_once VIEW_PATH . '/home.php';      
 	}
 	private function loadDashboard() {
-		require_once '/var/www/html/website-z/src/controller.php';
+		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db);
 		// holt den anzuzeigenden Monat und Jahr aus den Pfad
 		// wenn keiner angegeben dann wird der aktuelle an renderDashboard übergeben 
@@ -80,7 +80,7 @@ class Router {
 	}
 
 	private function loadLogin() {
-		require_once VIEW_URL . '/login.php';
+		require_once VIEW_PATH . '/login.php';
 	}
 
 	private function pageNotFound() {
@@ -90,13 +90,13 @@ class Router {
 
 	// POST Funktionen 
 	private function handleControllerPost(){
-		require_once '/var/www/html/website-z/src/controller.php'; 
+		require_once CORE_PATH . '/controller.php'; 
 		$controller = new Controller($this->db);
 		$controller->handleFormRequest(); 
 	}
 	// hier müsste noch logik für den login gemacht werden vllt in einer login.php
 	private function handleLoginPost(){
-		require_once '/var/www/html/website-z/src/controller.php';
+		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db);
 		$controller->handleLogin();
 	}

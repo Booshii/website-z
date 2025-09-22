@@ -95,6 +95,28 @@ nav a:hover{
     grid-area: paragraph; 
 }
 
+/* ************************************* */
+/* ********** Auswahl Fewo ***************/
+/* ************************************* */
+.select-flat-section{
+	display: flex; 
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	width: 100%;
+}
+.select-flat-section h2 {
+	text-align: center;
+	border-style: dashed;
+	width: 30%;
+}
+.button-select-flat{
+	background-color: var(--color-secondary);
+	min-height: 100px;
+	width: 280px;
+}
+  
+
 
 /* ************************************* */
 /* ** Ausstattung & Zimmergestalltung ** */

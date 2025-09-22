@@ -1,6 +1,0 @@
-{
-    "name": "booshi/website-z",
-    "require": {
-        "phpunit/phpunit": "^12.0"
-    }
-}
