@@ -1,0 +1,82 @@
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 0 24px;
+    margin: 0;
+    border-bottom: 2px solid var(--color-secondary);
+    height: 6rem;
+}
+#header__h1 {
+    font-family: "Pavanam", Arial, sans-serif;
+    margin-top: 0.5rem;
+}
+#header__h1__span {
+    /* font-size: clamp(0.5rem,5vw,2rem); */
+    font-size:var(--step-2);
+}
+.socials{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 180px;
+}
+
+
+#menu-modal-element{
+  position: fixed;
+  top: 0;
+  left: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+	max-width: unset;
+	max-height: unset;
+  background: white;
+}
+#menu-close-button{
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+}
+#menu-btn{
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+}
+nav {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2rem;
+}
+nav a{
+	padding: 1rem;
+	font-size: var(--step-3);
+	text-decoration: none;
+	position: relative;
+  text-decoration: none;
+  color: black;
+  padding-bottom: 4px; /* Platz für den Strich */
+  transition: color 0.3s ease;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+
+nav a:hover::after {
+  width: 100%;
+}

@@ -7,6 +7,7 @@ define('PUBLIC_PATH', BASE_PATH . '/public');
 define('SRC_PATH', BASE_PATH . '/src');
 define('VIEW_PATH', BASE_PATH . '/src/views/');
 define('CORE_PATH', BASE_PATH . '/src/core/');
+define('TEMPLATE_PATH', BASE_PATH . '/src/templates/');
 
 $envFile = BASE_PATH . '/.env';
 

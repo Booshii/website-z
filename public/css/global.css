@@ -1,17 +1,89 @@
+@import url('/css/header.css');
+@import url('/css/footer.css');
+
+@font-face {
+  font-family: "Pavanam";
+  src: url("/fonts/Pavanam/Pavanam-Regular.woff2") format("woff2"),
+       url("/fonts/Pavanam/Pavanam-Regular.woff") format("woff");
+  
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "AmaticSC";
+  src: url("/fonts/AmaticSC/AmaticSC-Regular.woff2") format("woff2"),
+       url("/fonts/AmaticSC/AmaticSC-Regular.woff") format("woff");
+  
+  font-style: normal;
+  font-display: swap;
+}
+
+
 :root {
-  --main-bg: #f0f0f0;
+
+  /* using utopia calculator for font sizing */
+  --step--1: clamp(0.6698rem, 0.5436rem + 0.561cqi, 1.0485rem);
+  --step-0: clamp(0.8038rem, 0.6348rem + 0.7509cqi, 1.3106rem);
+  --step-1: clamp(0.9645rem, 0.7399rem + 0.9982cqi, 1.6383rem);
+  --step-2: clamp(1.1574rem, 0.8606rem + 1.3192cqi, 2.0479rem);
+  --step-3: clamp(1.3889rem, 0.9986rem + 1.7347cqi, 2.5598rem);
+  --step-4: clamp(1.6667rem, 1.1556rem + 2.2713cqi, 3.1998rem);
+  --step-5: clamp(2rem, 1.3334rem + 2.9626cqi, 3.9997rem);
+
+  --main-bg: #fDECEF;
   --primary: #007bff;
 
 
 /* color-scheme */
+  --color-primary:#B9D696;
   --color-secondary:#79A37D;
 
   --color-success: #28a745; /* für Erfolgsmeldungen, freie Tage */
   --color-error:   #dc3545; /* für Fehlermeldungen, belegte Tage */
 
+  /* --global-font: Courier New;  */
+  --font-primary: "AmaticSC", Arial, sans-serif;
+  --font-secondary: "Pavanam", Arial, sans-serif;
 }
-
+*{
+  box-sizing: border-box;
+}
+header{
+  font-family: "Pavanam", Arial, sans-serif;
+}
 body {
   background-color: var(--main-bg);
+  /* font-family: "AmaticSC", Arial, sans-serif; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 0;
+  /* justify-content: space-around; In der Mitte des Bildschirms ausrichten */
+  align-items: center;
+  /* width: 100%; */
 }
-
+main{
+  /* width: 80vw; */
+}
+h1{
+  font-size: var(--step-5);
+  font-family: "AmaticSC", Arial, sans-serif;
+}
+h2{
+  font-size: var(--step-3);
+  font-family: "AmaticSC", Arial, sans-serif;
+}
+h3{
+  font-size: var(--step-2);
+  font-family: "AmaticSC", Arial, sans-serif;
+}
+ul{
+  font-size: var(--step-1);
+  font-family: "AmaticSC", Arial, sans-serif;
+}
+p{
+  font-size: var(--step-0);
+  font-family: "Pavanam", Arial, sans-serif;
+}

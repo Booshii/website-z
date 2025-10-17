@@ -1,5 +1,10 @@
 <?php
-/** @var array<string> $errors */
+/** 
+ * required variables
+ * @var array<string> $errors  
+ * */
+
+
 ?>
 
 <!DOCTYPE html>

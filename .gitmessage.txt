@@ -1,0 +1,18 @@
+# <type>(<scope>): <short summary>
+# type examples: feat | fix | docs | style | refactor | perf | test | chore
+# scope example: frontend, backend, api, auth, db, etc.
+
+# Description (imperative, present tense):
+#
+
+# --- Body (optional) ---
+# Explain what and why, not just how.
+# Use bullet points if needed.
+#
+# - Detail 1
+# - Detail 2
+#
+
+# --- Footer (optional) ---
+# BREAKING CHANGE: <explanation>
+# Closes: #issue

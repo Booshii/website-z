@@ -1,0 +1,11 @@
+footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    border-top: 2px solid var(--color-secondary);
+}
+.footer__ul
+{
+    list-style-type: none;
+}

@@ -14,7 +14,6 @@
   }
 
   /************ EventListener ************** */
-
   prevBtn.addEventListener('click', () => {
     let [ month, year ] = select.value.split('-').map(Number);
     month--;
@@ -22,7 +21,6 @@
       month = 12;
       year--;
     }
-  
     const flat = parseInt(selectFlat.value); 
     redirectTo(month, year, flat);
   });
@@ -64,10 +62,7 @@
 
           if (!label) return; 
 
-          if (select.value === 'true') {
-              label.style.background ='green';
-          } else {
-              label.style.background = 'red';
-          }
+          label.classList.toggle('label-occupied', select.value !== 'true');
+          label.classList.toggle('label-spare',    select.value === 'true');
       });
   });

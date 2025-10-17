@@ -37,7 +37,7 @@
 
     public function run(): void{
       require_once CORE_PATH . 'router.php';
-      $router = new Router($this->db); 
+      $router = new Router($this->db, $this->config); 
       $router->handleRequest(); 
     }
 

@@ -5,9 +5,27 @@ require_once 'repository.php';
 class Controller {
     
   private $repository; 
+  private $config; 
   
-  public function __construct($db) {
+  public function __construct($db, $config) {
     $this->repository = new Repository($db); 
+    $this->config = $config; 
+  }
+  //**********************************************/
+  //************** Fewo Funktionen ***************/
+
+  public function renderFeWo($flat){
+    $current_month = date("m");
+    $current_year = date("Y");
+    $displayed_flat = $flat; 
+    $calendar_events = $this->repository->getOneMonthCalendarEvents($current_year, $current_month, $flat);
+    // hier könnten noch fehler abgefangen werden wenn flat nicht int und oder 1 oder 2 
+    // nochmal gucken wie das im repo gemacht wird
+    if((int)$flat == 1){
+      require_once VIEW_PATH . '/fewo1.php';
+    } else {
+      require_once VIEW_PATH . '/fewo2.php';
+    }
   }
 
   //**********************************************/
@@ -16,15 +34,8 @@ class Controller {
   // erstmal nur für das Aufrufen der Seite
   public function renderDashboard($displayed_month, $displayed_year, $displayed_flat){
     // session hier überhaupt nötig da es ja da sein müsste wenn diese Funktion aufgerufen wird
-
-    // Variablen die in der dashboard.php benötigt werden 
-    $current_month = $displayed_month;
-    $current_year = $displayed_year;
-    $current_flat = $displayed_flat;
-
     $calendar_events = $this->repository->getOneMonthCalendarEvents($displayed_year, $displayed_month, $displayed_flat);
-    
-    
+       
     //*** Logik wenn man mehr mit Sessions arbetien will um Datenbank zugriffe zu reduzieren ***
     //**************************************************************************************** */
 
@@ -152,5 +163,22 @@ class Controller {
     $_SESSION['user_id'] = $user_database['id'];
     header("Location: /dashboard", true); 
     exit();
+  }
+
+//********************************************/
+//************** API Funktionen **************/
+
+  public function handleApiRequest($year, $month, $flat){
+    header('Content-Type: text/html; charset=utf-8');
+    try {
+      $events = $this->repository->getOneMonthCalendarEvents($year, $month, $flat);
+      require_once SRC_PATH . '/templates/calendar.php';
+      $html = renderCalendar($month, $year, $events);
+      echo $html;
+
+    } catch (Throwable $e){
+      http_response_code(500);
+      echo '<!-- Internal Server Error -->';
+    }
   }
 }

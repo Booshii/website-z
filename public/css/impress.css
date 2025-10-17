@@ -1,0 +1,11 @@
+.impress-section{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.left-container{
+    width: 20%;
+}
+.right-container{
+    width: 80%;
+}

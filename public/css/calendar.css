@@ -1,6 +1,36 @@
-.day-box{
-  width: 36px;
-  height: 36px;
+.calendar {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0; 
+}
+/*  für die orientierung ganz gut */
+.calendar th, .calendar td {
+  border: 1px solid #ddd;   /* falls du Gridlinien willst */
+  padding: 0;               /* wichtig für exakte Quadrate */
+  box-sizing: border-box; 
+}
+/* Quadratische Zellen (td.day-box) */
+.calendar td.day-box {
+  position: relative;       /* Bezug für absolute Inhalte */
+  height: 0;                /* Höhe kommt über ::before */
+  padding: 0;               /* kein zusätzliches Padding */
+}
+/* erzeugt die quadratische Höhe (Höhe = Breite) */
+.calendar td.day-box::before {
+  content: "";
+  display: block;
+  padding-top: 100%;        /* 100% der Breite = Quadrat */
+}
+/* Inhalt in die Zelle positionieren */
+.calendar td.day-box > time {
+  position: absolute;
+  inset: 0;    
+  display: flex;     
+  align-items: center;   /* vertikal */
+  justify-content: center; /* horizontal */
+  font-weight: 600;
+  font-size: var(--step-2);
 }
 .spare{
   background-color: var(--color-success);

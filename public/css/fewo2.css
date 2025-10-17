@@ -1,0 +1,199 @@
+/* hier kann man noch verbessern wie sich die Abstände jeweils verhalten 
+und erstmal wird von der kleinsten Größe 450px ausgegangen weil der Browser bei mit nicht kleiner geht 
+320 wäre aber besser, ich will aber erstmal gucken wie eine 450 auf nem 12 mini aussieht */
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 4rem;
+		width: clamp(320px, 100%, 1440px); 
+
+}
+.picture-gallery-section{
+	width: 90%;
+  min-width: 0; 
+}
+.pictures-container{
+	display: grid; 
+  grid-auto-flow: column;
+	grid-auto-columns: minmax(200px, fit-content(250px));
+	grid-template-rows: repeat(2, auto);
+	--g: clamp(30px, 2.8cqw, 40px); 
+	gap: var(--g);
+	container-type: inline-size; 
+	container-name: gallery;
+	min-width: 0; 
+}
+
+.gallery-item{
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+@container gallery (max-width: 720px){
+  .gallery-item:nth-child(n+7){ display: none; }
+  /* .show-more-btn{ display: inline-block; } */
+}
+
+/* ************************************* */
+/* *********** Ausstattung ************* */
+/* ************************************* */
+
+.equipment-section{
+	width: max(95%, 450px);
+}
+.equipment-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	background-color: rgb(from var(--color-primary) r g b / 0.2);
+	padding: clamp(1rem, 1vw, 2.5rem);
+}
+.equipment-section h1  {
+	margin:0 3rem 0;
+}
+.equipment ul, h2 {
+	margin:0;
+}
+.equipment-container-left{
+    display: flex;
+    flex-direction: column;
+    width: max(200px,40%);
+    gap: 1rem; 
+}
+.equipment-container-right{
+    display: flex;
+    flex-direction: column;
+    width: max(200px,40%);
+    gap: 1rem; 
+}
+#equipment-more-btn{
+	align-self: flex-end;
+	background-color: var(--color-secondary);
+	outline: none;
+	border: none; 
+	padding: 0.3rem 3rem ;
+	font-family: "AmaticSC", Arial, sans-serif;
+	font-size: clamp(0.3rem,5vw,1.5rem);
+	font-weight: 600;
+	letter-spacing: 0.2em;
+	cursor: pointer;
+  border-radius: 0.50rem;
+}
+
+/* ************************************* */
+/* ****** Verfügbarkeit & Preise ******* */
+/* ************************************* */
+.availability-prices-section{
+	container-type: inline-size; 
+  container-name: availability-prices;
+	width: 95%;
+	/* border: solid;  */
+}
+.availability-prices-container{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	/* border: solid;  */
+}
+
+.availability-container{
+	width: max(500px,40%);
+	/* border: solid; */
+	padding: 0 3rem 0;
+}
+.availability-container h1 {
+	margin:0;
+}
+@container availability-prices (max-width: 700px){
+  .availability-prices-container{
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+
+
+/* ******** calendar-container ********* */
+.calendar-nav{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 0;
+	width: 100%; 
+	background: transparent; /* kein Hintergrund */
+  	border: none; 
+	padding: 0.8rem 0;
+}
+
+.calendar-nav button {
+	background: none;
+	border: none;
+	font-size: 1.5rem; 
+	cursor: pointer;
+}
+select {
+	padding: 0.5rem;
+	background: transparent; /* kein Hintergrund */
+	border: none; 
+	font: 1.5rem bold;
+	width: auto;             /* nur so breit wie Inhalt */
+	/* min-width: fit-content; */
+	padding: 0 0.25rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+/* ********* price-container ********** */
+.price-container{
+	width: max(500px,60%);
+	padding-left: 3rem;
+	/* border: solid; */
+	display: grid;
+	grid-template-areas: 
+					"head head"
+					"summer winter"
+					;
+	justify-content: start;
+	gap: 2rem;
+}
+.price-container h1 {
+	margin: 0;
+}
+.price-head{
+	grid-area: head;
+}
+.summer{
+	grid-area: summer;
+}
+.winter{
+	grid-area: winter; 
+}
+.price-container h3 {
+	margin: 0;
+}
+.subheadline {
+	margin-top: 0;
+	font-size: 1rem;   
+}
+
+/* ************************************* */
+/* ********* booking & Banner ********** */
+/* ************************************* */
+.booking {
+	width: 95%;
+}
+.booking h1  {
+	margin:0 3rem 0;
+}
+.booking p {
+	padding: 2.5rem;
+	margin: 0;
+	font-size: 2rem;
+	letter-spacing: 0.5rem;
+	text-align: center; 
+	background-color: rgb(from var(--color-primary) r g b / 0.2);
+}
+
