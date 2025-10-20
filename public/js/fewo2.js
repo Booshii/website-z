@@ -1,66 +1,95 @@
+/***************************************** */
+/************* DOM-Elements ************** */
+/***************************************** */
 
-  /************* DOM-Elements ************** */
+  /************ Gallery ************** */
+  const galleryModalElement = document.getElementById('gallery-modal-element');
+  const galleryMoreButton = document.getElementById('gallery-more-button');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryModalCounter = document.getElementById('counter');
+  const galleryModalImage = document.getElementById('gallery-modal-image');
+  /************ Equipment ************** */
+  const equipmentModalElement = document.getElementById('equipment-modal-element');
+  const equipmentModalButton = document.getElementById('equipment-more-btn');
+  const equipmentCloseButton = document.getElementById('equipment-modal-close-button');
+  /************ Calendar ************** */
   const selectMonth = document.getElementById('select-month');
   const selectYear = document.getElementById('select-year');
   const prevBtn = document.getElementById('prev-month');
   const nextBtn = document.getElementById('next-month');
   const calendarContainer = document.getElementById('calendar-container');
-   /************* rle,emts for modal ************** */
-  const modalContainer = document.getElementById('modal-container');
-  const modalElement = document.getElementById('modal-element')
-  const modalButton = document.getElementById('equipment-more-btn')
-  const closeButton = document.getElementById('modal-close-button');
 
-  /************* consts ************** */
+  /************* Variables ************** */
   const baseUrl = new URL("http://localhost/api/events");
   const flat = 2; 
-  let month = selectMonth.value;
-  let year = selectYear.value;
+  let currentShownModalImageIndex; 
 
-  /************ EventListener ************** */
+/***************************************** */
+/************ EventListener ************** */
+/***************************************** */
+
+  /************ Gallery ************** */
+  showMoreButton.addEventListener('click', () => {
+    openModal();
+  })
+
+  /************ Calendar ************** */
   selectMonth.addEventListener('change', () => {
-    month = selectMonth.value;
+    let { month, year } = getYearMonth()
     updateCalendar(month, year,flat);
   });
   selectYear.addEventListener('change', () => {
-    year = selectYear.value;
+    let { month, year } = getYearMonth()
     updateCalendar(month, year, flat);
   });
   
   prevBtn.addEventListener('click', () => {
+    let { month, year } = getYearMonth()
     month --;
     if (month < 1) {
       month = 12;
       year--;
     }
-    selectMonth.value = month;
-    selectYear.value = year; 
+    selectMonth.value = String(month);
+    selectYear.value = String(year); 
     updateCalendar(month, year, flat); 
   });
   
   nextBtn.addEventListener('click', () => {
+    let { month, year } = getYearMonth()
     month ++;
     if (month > 12) {
       month = 1;
       year++;
     }
-    selectMonth.value = month;
-    selectYear.value = year; 
+    selectMonth.value = String(month);
+    selectYear.value = String(year); 
     updateCalendar(month, year, flat); 
   });
 
-  closeButton.addEventListener('click', () => {
+  /************ Equipment ************** */
+  equipmentCloseButton.addEventListener('click', () => {
     modalElement.close();
   })
-  modalButton.addEventListener('click', () => {
+  equipmentModalButton.addEventListener('click', () => {
     openModal();
-
   })
+
+
+
 // hier müssen mit arrow functions noch eingefügt werden 
 // variable anpassen und updateCalendar ausführen 
-  /*************** Functions *************** */
 
-  // redirect
+/***************************************** */
+/************** Functions **************** */
+/***************************************** */
+  /************ Helper ************** */
+  function getYearMonth(){
+    const month = Number(selectMonth.value);
+    const year = Number(selectYear.value);
+    return { month, year }
+  }
+  /************ Calendar ************** */
   async function updateCalendar(month, year, flat) {
     month = parseInt(month, 10);
     year  = parseInt(year, 10);
@@ -99,11 +128,31 @@
       calendarContainer.innerHTML = '<p class="error">Fehler beim Laden des Kalenders.</p>';
     }
   }
-/***********************************/
-/********** Modal Fenster **********/
-/***********************************/
-function openModal(){
+  /************ Modals ************** */
+  function openModal(modalElement){
     modalElement.showModal();
     // document.body.classList.add('modal-open'); // deactivate scrollilng on page
-}
+  }
+
+  function openGalleryModal(index){
+    loadImage(index);
+    galleryModalElement.showModal();
+  }
+
+  function loadImage(id){
+    const srcFullImage = galleryItems[id].dataset.full || galleryItems[id].src;
+    const img = new Image(); 
+    img.onload = () => {
+        galleryModalImage.src = srcFullImage; 
+        galleryModalImage.alt = galleryItems[id].alt || '';
+    }
+    img.src = srcFullImage;
+    updateCounter();
+  }
+
+  function updateCounter(){
+    let total = galleryItems.length; 
+    galleryModalCounter.textContent = `${currentIndex + 1} / ${total}`;
+    galleryModalElement.setAttribute('aria-label', `Bild ${currentIndex + 1} von ${total}`);
+  }
 

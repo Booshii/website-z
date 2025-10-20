@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Document</title>
-		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/home.css">
 		<link rel="stylesheet" href="/css/global.css">
 		<script src="/js/main.js" defer></script>
 		<script src="/js/header.js" defer></script>
@@ -58,12 +58,15 @@
 					<!-- <button class="button-select-flat" onclick="location.href='<?= $config['base_url'] ?>/fewo1'">
 						Unsere große Ferienwohnung <br> <span>bis 6 Personen</span>
 					</button> -->
-					<a href="<?= rtrim($config['base_url'], '/') ?>/fewo1" class="button-select-flat">
-  Unsere große Ferienwohnung<br><span>bis 6 Personen</span>
-</a>
-					<button class="button-select-flat" onclick="location.href='<?= $BASE_URL ?>/fewo2'">
+					<a href="<?= $config['base_url']?>/fewo1" class="button-select-flat">
+						Unsere große Ferienwohnung<br><span>bis 6 Personen</span>
+					</a>
+					<a href="<?= $config['base_url']?>/fewo2" class="button-select-flat">
+						Unsere kleine Ferienwohnung<br><span>bis 3 Personen</span>
+					</a>
+					<!-- <button class="button-select-flat" onclick="location.href='<?= $BASE_URL ?>/fewo2'">
 						Unsere kleine Ferienwohnung </br> <span>bis 3 Personen</span>
-					</button>	
+					</button>	 -->
 				</section>
 
 				<section class="picture-gallery-section">
@@ -88,7 +91,7 @@
 							<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="17">
 							<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="18">
 					</div>
-					<button class="show-more-button" > more </button>
+					<button id="show-more-button" > <strong>Mehr</strong> (18) <span class="plus">&#43</span></button>
 				</section>
 				<section class="map-section">
 					<iframe class="map"

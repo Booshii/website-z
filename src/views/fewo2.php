@@ -20,15 +20,16 @@
   <main>
     <section class="picture-gallery-section">
 			<div class="pictures-container">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="1">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="2">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="3">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="4">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="5">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="6">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="7">
-        <img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="8">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="1">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="2">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="3">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="4">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="5">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="6">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="7">
+				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="8">
 			</div>
+			<button id="galleryMoreButton" > <strong>Mehr</strong> (8) <span class="plus">&#43</span></button>
 		</section>
 		<section class="equipment-section">
 			<h1>Ausstattung</h1>
@@ -190,6 +191,35 @@
 		</p>
 	</section>
   </main>
+	<dialog id="equipment-modal-element">
+		<header class="equipment-modal__header">
+			<h1>Ferienwohnung 1</h1>
+			<button id="equipment-modal-close-button">&times;</button>
+		</header>
+		<div id="equipment-modal__content">
+			<p>
+				Die Unterkunft ist auf zwei Ebenen. Unten befinden sich das Wohnzimmer mit Kamin. Das Wohnzimmer ist verbunden mit der Küche und dem Essbereich. Das Schlafzimmer ist als einziger Raum komplett zum Abdunkeln und mit Tür. Das zweite Bett ist über eine Treppe (hier kann man nicht stehen) zu erreichen und hat einen schönen Blick auf unseren Garten. 
+				Neben der kleineren Ferienwohnung ist noch unsere zweite Ferienwohnung. Diese sind nicht miteinander verbunden und haben jeweils einen privaten Eingang und die Terassen sind getrennt. Der Eingang der Ferienwohnung ist über den Hof der Gastgeberin zu erreichen. Die Terrasse ist jedoch komplett privat und nicht einsehbar für die Gastgeberin. Bitte respektieren Sie den Privatbereich der Gastgeberin.			</p>
+			<h2>WICHTIG</h2>
+			<p>
+				Zur und nach Ihrem Aufenthalt wird gemeinsam der aktuelle Zählerstand abgelesen und die Kosten des Verbrauches werden anhand des aktuellen Tarifs (der Stadtwerke Neuruppin) berechnet. Das bedeutet, die Koste für Ihren Stromverbrauch werden im Nachhinein berechnet und Ihnen in Rechnung gestellt. Wir wollen uns damit in keinem Fall bereichern, sondern lediglich einen sparsamen Energieverbrauch anregen.				</br>
+				Die Wärme kommt ausschließlich über den Kamin. Nur im Bad gibt es eine elektronische Heizung. Deshalb ist die FeWo im Winter günstiger, weil der Verbrauch teurer ist. Hausschuhe sind in der ganzen Ferienwohnung von Vorteil. Sie können für den Kamin gerne eigenes Feuerholz (nur naturbelassenes) mitbringen oder bei uns für 8,50€ (kleiner Korb) kaufen.
+			</p>
+			<h2>REGELN</h2>
+			<p>
+				In der gesamten Ferienwohnung ist Rauchverbot!</br>
+				Tiere sind aufgrund unserer zwei Hausdamenkatzen und den Allergikern nicht erlaubt.</br>
+				Wir haben unsere Ferienwohnung mit viel Liebe und Aufwand gestaltet, daher bitten wir unsere Gäste, alles mit Respekt und Sorgfalt zu behandeln, damit wir noch sehr lange Gäste begrüßen können.
+				</br>
+				Das Gartencafé ist vom 1. Mai bis zum letzten Septemberwochenende immer Samstag und Sonntag von 13-18 Uhr geöffnet.
+				https://www.gunns-kuchen.de/
+			</p>
+
+		</div>
+		<footer class="equipment-modal__footer">
+
+		</footer>
+	</dialog>
 </body>
 <?php
 	require_once TEMPLATE_PATH . "footer.php";
