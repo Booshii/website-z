@@ -122,8 +122,7 @@
 												echo '<option value="' . ($key + 1) . '" selected>' . $m . '</option>'; 
 											} else {
 												echo '<option value="' . ($key + 1) . '">' . $m . '</option>'; 
-											}
-											
+											}	
 										}
 									?>
 								</select>

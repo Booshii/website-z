@@ -144,6 +144,7 @@ main{
 	background: transparent; /* kein Hintergrund */
   	border: none; 
 	padding: 0.8rem 0;
+	font-family: var(--font-secondary);
 }
 
 .calendar-nav button {
@@ -156,7 +157,9 @@ select {
 	padding: 0.5rem;
 	background: transparent; /* kein Hintergrund */
 	border: none; 
-	font: 1.5rem bold;
+	font-size: var(--step-2);
+	font-weight: 600;
+	font-family: var(--font-secondary);
 	width: auto;             /* nur so breit wie Inhalt */
 	/* min-width: fit-content; */
 	padding: 0 0.25rem;

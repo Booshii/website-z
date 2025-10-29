@@ -29,6 +29,7 @@
   --step-3: clamp(1.3889rem, 0.9986rem + 1.7347cqi, 2.5598rem);
   --step-4: clamp(1.6667rem, 1.1556rem + 2.2713cqi, 3.1998rem);
   --step-5: clamp(2rem, 1.3334rem + 2.9626cqi, 3.9997rem);
+  --step-calendar: clamp(0.7rem, 0.8606rem + 1.3192cqi, 2.0479rem);
 
   --main-bg: #fDECEF;
   --primary: #007bff;
