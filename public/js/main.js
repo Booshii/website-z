@@ -63,7 +63,6 @@ function showPrevImage(){
 function updateCounter(){
     modalCounter.textContent = `${currentIndex + 1} / ${total}`;
     modalElement.setAttribute('aria-label', `Bild ${currentIndex + 1} von ${total}`);
-    
 }
 
 // Event listeners 

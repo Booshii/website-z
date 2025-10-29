@@ -95,11 +95,11 @@ main{
 	border: none; 
 	padding: 0.3rem 3rem ;
 	font-family: "AmaticSC", Arial, sans-serif;
-	font-size: clamp(0.3rem,5vw,1.5rem);
+	font-size: var(--step-2);
 	font-weight: 600;
 	letter-spacing: 0.2em;
 	cursor: pointer;
-  border-radius: 0.50rem;
+  	border-radius: 0.50rem;
 }
 
 /* ************************************* */
