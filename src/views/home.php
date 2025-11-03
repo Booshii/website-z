@@ -91,7 +91,7 @@
 							<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="17">
 							<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="18">
 					</div>
-					<button id="show-more-button" > <strong>Mehr</strong> (18) <span class="plus">&#43</span></button>
+					<button id="gallery-more-button" > <strong>Mehr</strong> (18) <span class="plus">&#43</span></button>
 				</section>
 				<section class="map-section">
 					<iframe class="map"

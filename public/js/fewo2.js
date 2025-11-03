@@ -8,6 +8,9 @@
   const galleryItems = document.querySelectorAll('.gallery-item');
   const galleryModalCounter = document.getElementById('counter');
   const galleryModalImage = document.getElementById('gallery-modal-image');
+  const galleryModalNextButton = document.getElementById('gallery-modal-next-button');
+  const galleryModalPrevButton = document.getElementById('gallery-modal-prev-button');
+  const galleryModalCloseButton = document.getElementById('gallery-modal-close-button');
   /************ Equipment ************** */
   const equipmentModalElement = document.getElementById('equipment-modal-element');
   const equipmentModalButton = document.getElementById('equipment-more-btn');
@@ -20,18 +23,26 @@
   const calendarContainer = document.getElementById('calendar-container');
 
   /************* Variables ************** */
+  const flat = document.querySelector('meta[name="page-id"]').getAttribute('content'); 
   const baseUrl = new URL("http://localhost/api/events");
-  const flat = 2; 
-  let currentShownModalImageIndex; 
-
+  let currentShownModalImageIndex; // wofür???
+  let currentIndex;
 /***************************************** */
 /************ EventListener ************** */
 /***************************************** */
 
   /************ Gallery ************** */
-  showMoreButton.addEventListener('click', () => {
-    openModal();
-  })
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => openModal(galleryModalElement, index)); 
+  });
+  galleryMoreButton.addEventListener('click', () => openModal(galleryModalElement, 7));
+  galleryModalCloseButton.addEventListener('click', () => closeModal(galleryModalElement));
+  /********** Gallery - Modal ************ */
+  galleryModalPrevButton.addEventListener('click', showPrevImage);
+  galleryModalNextButton.addEventListener('click', showNextImage);
+  /********* Equipment - Modal *********** */
+  equipmentCloseButton.addEventListener('click', () => closeModal(equipmentModalElement));
+  equipmentModalButton.addEventListener('click', () => openModal(equipmentModalElement));
 
   /************ Calendar ************** */
   selectMonth.addEventListener('change', () => {
@@ -66,15 +77,6 @@
     selectYear.value = String(year); 
     updateCalendar(month, year, flat); 
   });
-
-  /************ Equipment ************** */
-  equipmentCloseButton.addEventListener('click', () => {
-    modalElement.close();
-  })
-  equipmentModalButton.addEventListener('click', () => {
-    openModal();
-  })
-
 
 
 // hier müssen mit arrow functions noch eingefügt werden 
@@ -129,14 +131,18 @@
     }
   }
   /************ Modals ************** */
-  function openModal(modalElement){
+  function openModal(modalElement, index = null) {
+    if (index !== null) {
+      currentIndex = index;
+      loadImage(currentIndex);
+    }
     modalElement.showModal();
-    // document.body.classList.add('modal-open'); // deactivate scrollilng on page
+        // document.body.classList.add('modal-open'); // deactivate scrollilng on page
   }
 
-  function openGalleryModal(index){
-    loadImage(index);
-    galleryModalElement.showModal();
+  function closeModal(modalElement){
+    modalElement.close();
+    // document.body.classList.add('modal-open'); // deactivate scrollilng on page
   }
 
   function loadImage(id){
@@ -154,5 +160,15 @@
     let total = galleryItems.length; 
     galleryModalCounter.textContent = `${currentIndex + 1} / ${total}`;
     galleryModalElement.setAttribute('aria-label', `Bild ${currentIndex + 1} von ${total}`);
+  }
+
+  function showNextImage(){
+    currentIndex = (currentIndex < galleryItems.length - 1) ? currentIndex + 1 : 0; 
+    loadImage(currentIndex);
+  }
+
+  function showPrevImage(){
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : galleryItems.length - 1;
+    loadImage(currentIndex);
   }
 

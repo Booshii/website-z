@@ -2,6 +2,9 @@
 und erstmal wird von der kleinsten Größe 450px ausgegangen weil der Browser bei mit nicht kleiner geht 
 320 wäre aber besser, ich will aber erstmal gucken wie eine 450 auf nem 12 mini aussieht */
 
+/* ************************************* */
+/* ************** main ***************** */
+/* ************************************* */
 main{
 	display: flex;
 	flex-direction: column;
@@ -11,6 +14,10 @@ main{
 	width: clamp(320px, 100%, 1440px); 
 
 }
+
+/* ************************************* */
+/* ************ Fotogalerie ************ */
+/* ************************************* */
 .picture-gallery-section{
 	width: 90%;
   min-width: 0; 
@@ -18,32 +25,33 @@ main{
 }
 .pictures-container{
 	display: grid; 
-  	grid-auto-flow: column;
+  grid-auto-flow: column;
 	grid-auto-columns: minmax(200px, fit-content(250px));
 	grid-template-rows: repeat(2, auto);
-	--g: clamp(30px, 2.8cqw, 40px); 
+	--g: clamp(20px, 2.8cqw, 40px); 
 	gap: var(--g);
 	min-width: 0; 
 }
 
 .gallery-item{
-    width: 100%;
-    aspect-ratio: 1/1;
+	width: 100%;
+	aspect-ratio: 1/1;
+	cursor: pointer;
 }
-#show-more-button{
-    position: absolute;
-    display: none;
-    bottom: 10px; 
-    right: 10px;
-    z-index: 10;
-    padding: 0.8rem 1.2rem; 
-    border: none;
-    border-radius: 30px;
-    background-color: white;
-    font-size: var(--step-0);
-    cursor: pointer;
+#gallery-more-button{
+	position: absolute;
+	display: none;
+	bottom: 10px; 
+	right: 10px;
+	z-index: 10;
+	padding: 0.8rem 1.2rem; 
+	border: none;
+	border-radius: 30px;
+	background-color: white;
+	font-size: var(--step-0);
+	cursor: pointer;
 }
-#show-more-button .plus {
+#gallery-more-button .plus {
   color: red;
   font-size: var(--step-0);
   font-weight: bold;
@@ -52,7 +60,7 @@ main{
 
 @media (max-width: 720px){
   .gallery-item:nth-child(n+7){ display: none; }
-  #show-more-button{ display: inline-block; }
+  #gallery-more-button{ display: inline-block; }
 }
 
 /* ************************************* */
@@ -73,20 +81,17 @@ main{
 .equipment-section h1  {
 	margin:0 3rem 0;
 }
-.equipment ul, h2 {
-	margin:0;
-}
 .equipment-container-left{
-    display: flex;
-    flex-direction: column;
-    width: max(200px,40%);
-    gap: 1rem; 
+	display: flex;
+	flex-direction: column;
+	width: max(200px,40%);
+	gap: 1rem; 
 }
 .equipment-container-right{
-    display: flex;
-    flex-direction: column;
-    width: max(200px,40%);
-    gap: 1rem; 
+	display: flex;
+	flex-direction: column;
+	width: max(200px,40%);
+	gap: 1rem; 
 }
 #equipment-more-btn{
 	align-self: flex-end;
@@ -99,7 +104,7 @@ main{
 	font-weight: 600;
 	letter-spacing: 0.2em;
 	cursor: pointer;
-  	border-radius: 0.50rem;
+	border-radius: 0.50rem;
 }
 
 /* ************************************* */
@@ -133,7 +138,6 @@ main{
 	}
 }
 
-
 /* ******** calendar-container ********* */
 .calendar-nav{
 	display: flex;
@@ -142,7 +146,7 @@ main{
 	gap: 0;
 	width: 100%; 
 	background: transparent; /* kein Hintergrund */
-  	border: none; 
+  border: none; 
 	padding: 0.8rem 0;
 	font-family: var(--font-secondary);
 }
@@ -212,9 +216,96 @@ select {
 .booking p {
 	padding: 2.5rem;
 	margin: 0;
-	font-size: 2rem;
+	font-size: var(--step-2);
 	letter-spacing: 0.5rem;
 	text-align: center; 
 	background-color: rgb(from var(--color-primary) r g b / 0.2);
 }
 
+/* ************************************* */
+/* ********** Modal Elemente *********** */
+/* ************************************* */
+
+/********* Equipment - Modal *********** */
+#equipment-modal-element{
+	width: 90%;
+}
+.equipment-modal__header{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--color-secondary);
+	width: 100%;
+}
+#equipment-modal__header__h1{
+	margin: 0px;
+}
+#equipment-modal-close-button{
+	font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+	position: absolute;
+  right: 20px;
+	margin: 10px;
+}
+#equipment-modal__content{
+	margin: 2em 0 2em 0;
+}
+#equipment-modal__content__h2{
+	margin: 0.5em 0 0 0;
+}
+#equipment-modal__content p {
+	margin: 0;
+}
+
+/********* Gallery - Modal *********** */
+#gallery-modal-element{
+	flex-direction: column;
+	justify-content: space-around;
+	align-content: center;
+	width: 100vw;
+	height: 100vh; 
+	border: none;
+	background: rgba(0, 0, 0, 0.9);
+	color: white;
+}
+#gallery-modal-element[open]{
+	display: flex;
+}
+#gallery-modal__header{
+    /* position: relative;
+    align-items: center;
+    height: 10%; 
+		  */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 10%;  
+}
+#gallery-modal-close-button {
+	position: absolute;
+	font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  right: 20px;
+	margin: 10px;
+} 
+#gallery-modal__content{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 90%; 
+}
+.gallery-modal-element__button {
+	background: none;
+	border: none;
+	font-size: 2em;
+	cursor: pointer;
+	margin: 10px;
+	color: white;
+}
+#gallery-modal-image{
+	max-height: 100%;
+}

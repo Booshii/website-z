@@ -216,7 +216,7 @@ grid-template-areas:
     aspect-ratio: 1/1;
     cursor: pointer;
 }
-#show-more-button{
+#gallery-more-button{
     position: absolute;
     display: none;
     bottom: 10px; 
@@ -229,7 +229,7 @@ grid-template-areas:
     font-size: var(--step-0);
     cursor: pointer;
 }
-#show-more-button .plus {
+#gallery-more-button .plus {
   color: red;
   font-size: var(--step-0);
   font-weight: bold;
@@ -238,14 +238,14 @@ grid-template-areas:
 
 /* ******** Dialog  Fotogalerie ******** */
 #modal-element{
-    border: none;
-    width: 100vw;
-    height: 100vh; 
-    background: rgba(0, 0, 0, 0.9);
-    flex-direction: column;
-    justify-content: space-around;
-    align-content: center;
-    color: white;
+	border: none;
+	width: 100vw;
+	height: 100vh; 
+	background: rgba(0, 0, 0, 0.9);
+	flex-direction: column;
+	justify-content: space-around;
+	align-content: center;
+	color: white;
 }
 #modal-element[open] {
     display: flex;
@@ -256,8 +256,7 @@ grid-template-areas:
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%;
-    
+    height: 10%;  
 }
 
 #close-button {
@@ -366,14 +365,14 @@ td{
 
 @media (max-width: 1055px){
   .gallery-item:nth-child(n+16){ display: none; }
-  #show-more-button{ display: inline-block;}
+  #gallery-more-button{ display: inline-block;}
 }
 
 @media (max-width: 875px){
   .gallery-item:nth-child(n+13){ display: none; }
-  #show-more-btn{ display: inline-block; }
+  #gallery-more-button{ display: inline-block; }
 }
 @media (max-width: 690px){
   .gallery-item:nth-child(n+10){ display: none; }
-  #show-more-btn{ display: inline-block; }
+  #gallery-more-button{ display: inline-block; }
 }

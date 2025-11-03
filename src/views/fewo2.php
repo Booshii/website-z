@@ -7,11 +7,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="page-id" content="2">
   <title>Ferienwohnung 2</title>
 	<link rel="stylesheet" href="/css/global.css">
-	<link rel="stylesheet" href="/css/fewo2.css">
+	<link rel="stylesheet" href="/css/fewo.css">
 	<link rel="stylesheet" href="/css/calendar.css">
 	<script src="../../js/fewo2.js" defer></script>
+	<script src="/js/header.js" defer></script>
 </head>
 <body>
 	<?php
@@ -29,7 +31,7 @@
 				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="7">
 				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="8">
 			</div>
-			<button id="galleryMoreButton" > <strong>Mehr</strong> (8) <span class="plus">&#43</span></button>
+			<button id="gallery-more-button" > <strong>Mehr</strong> (8) <span class="plus">&#43</span></button>
 		</section>
 		<section class="equipment-section">
 			<h1>Ausstattung</h1>
@@ -190,21 +192,22 @@
 		</p>
 	</section>
   </main>
+
 	<dialog id="equipment-modal-element">
 		<header class="equipment-modal__header">
-			<h1>Ferienwohnung 1</h1>
+			<h1 id="equipment-modal__header__h1">Ferienwohnung 2</h1>
 			<button id="equipment-modal-close-button">&times;</button>
 		</header>
 		<div id="equipment-modal__content">
 			<p>
 				Die Unterkunft ist auf zwei Ebenen. Unten befinden sich das Wohnzimmer mit Kamin. Das Wohnzimmer ist verbunden mit der Küche und dem Essbereich. Das Schlafzimmer ist als einziger Raum komplett zum Abdunkeln und mit Tür. Das zweite Bett ist über eine Treppe (hier kann man nicht stehen) zu erreichen und hat einen schönen Blick auf unseren Garten. 
 				Neben der kleineren Ferienwohnung ist noch unsere zweite Ferienwohnung. Diese sind nicht miteinander verbunden und haben jeweils einen privaten Eingang und die Terassen sind getrennt. Der Eingang der Ferienwohnung ist über den Hof der Gastgeberin zu erreichen. Die Terrasse ist jedoch komplett privat und nicht einsehbar für die Gastgeberin. Bitte respektieren Sie den Privatbereich der Gastgeberin.			</p>
-			<h2>WICHTIG</h2>
+			<h2 id="equipment-modal__content__h2">WICHTIG</h2>
 			<p>
 				Zur und nach Ihrem Aufenthalt wird gemeinsam der aktuelle Zählerstand abgelesen und die Kosten des Verbrauches werden anhand des aktuellen Tarifs (der Stadtwerke Neuruppin) berechnet. Das bedeutet, die Koste für Ihren Stromverbrauch werden im Nachhinein berechnet und Ihnen in Rechnung gestellt. Wir wollen uns damit in keinem Fall bereichern, sondern lediglich einen sparsamen Energieverbrauch anregen.				</br>
 				Die Wärme kommt ausschließlich über den Kamin. Nur im Bad gibt es eine elektronische Heizung. Deshalb ist die FeWo im Winter günstiger, weil der Verbrauch teurer ist. Hausschuhe sind in der ganzen Ferienwohnung von Vorteil. Sie können für den Kamin gerne eigenes Feuerholz (nur naturbelassenes) mitbringen oder bei uns für 8,50€ (kleiner Korb) kaufen.
 			</p>
-			<h2>REGELN</h2>
+			<h2 id="equipment-modal__content__h2">REGELN</h2>
 			<p>
 				In der gesamten Ferienwohnung ist Rauchverbot!</br>
 				Tiere sind aufgrund unserer zwei Hausdamenkatzen und den Allergikern nicht erlaubt.</br>
@@ -219,6 +222,20 @@
 
 		</footer>
 	</dialog>
+
+	<!-- Lightbox Gallery -->
+	<dialog id="gallery-modal-element">
+		<header id="gallery-modal__header">
+		<!-- aria-live für Screenreader - wenn sich ändert wird es neu vorgelesen -->
+			<span class="counter" id="counter" aria-live="polite"></span>
+			<button id="gallery-modal-close-button" class="gallery-modal-element__button">&times;</button>
+		</header>
+		<div id="gallery-modal__content">
+			<button id="gallery-modal-prev-button" class="gallery-modal-element__button">&lt;</button>
+			<img src="" alt="Modal Image" id="gallery-modal-image">
+			<button id="gallery-modal-next-button" class="gallery-modal-element__button">&gt;</button>
+		</div>
+	</dialog>	
 </body>
 <?php
 	require_once TEMPLATE_PATH . "footer.php";

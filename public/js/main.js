@@ -1,5 +1,5 @@
 const galleryItems = document.querySelectorAll('.gallery-item');
-const showMoreButton = document.getElementById('show-more-button');
+const showMoreButton = document.getElementById('gallery-more-button');
 const modalElement = document.getElementById('modal-element');
 const modalImage = document.getElementById('modal-image');
 
@@ -54,7 +54,6 @@ function closeModal() {
 function showNextImage(){
     currentIndex = (currentIndex < galleryItems.length - 1) ? currentIndex + 1 : 0; 
     loadImage(currentIndex);
-
 }
 function showPrevImage(){
     currentIndex = (currentIndex > 0) ? currentIndex - 1 : galleryItems.length - 1;

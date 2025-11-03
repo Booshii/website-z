@@ -1,16 +1,19 @@
-
+/***************************************** */
+/************* DOM-Elements ************** */
+/***************************************** */
   
-  /************* DOM-Elements ************** */
+  /************ Gallery ************** */
   const selectMonth = document.getElementById('select-month');
   const selectYear = document.getElementById('select-year');
   const prevBtn = document.getElementById('prev-month');
   const nextBtn = document.getElementById('next-month');
   const calendarContainer = document.getElementById('calendar-container');
+  
    /************* rle,emts for modal ************** */
   const modalContainer = document.getElementById('modal-container');
-  const modalElement = document.getElementById('modal-element')
+  const modalElement = document.getElementById('equipment-modal-element')
   const modalButton = document.getElementById('equipment-more-btn')
-  const closeButton = document.getElementById('modal-close-button');
+  const closeButton = document.getElementById('equipment-modal-close-button');
 
   /************* consts ************** */
   const baseUrl = new URL("http://localhost/api/events");
