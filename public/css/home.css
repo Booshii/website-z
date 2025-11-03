@@ -274,6 +274,7 @@ grid-template-areas:
 #modal-image{
     max-height: 100%;
 }
+/* das muss geändert werden */
 dialog button {
     background: none;
     border: none;
@@ -325,7 +326,7 @@ td{
 /* ************************************* */
 /* ********** Buchung Info ***************/
 /* ************************************* */
-.booking-information-section{
+#booking-section{
 	display: flex; 
 	flex-direction: row;
 	justify-content: space-evenly;
@@ -333,7 +334,7 @@ td{
     background-color: rgb(from var(--color-primary) r g b / 0.2);
     width: 100%;
 }
-.booking-information-section h2{
+#booking-section h2{
 	/* font-size: 3rem; */
 	width: 30%;
 }
@@ -345,7 +346,6 @@ td{
 	display: flex;
 	flex-direction: row;
     /* justify-content: space-around; */
-   
 }
 
 .card {

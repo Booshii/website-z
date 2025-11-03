@@ -207,13 +207,13 @@ select {
 /* ************************************* */
 /* ********* booking & Banner ********** */
 /* ************************************* */
-.booking {
+#booking-section {
 	width: 95%;
 }
-.booking h1  {
+#booking-section h1  {
 	margin:0 3rem 0;
 }
-.booking p {
+#booking-section p {
 	padding: 2.5rem;
 	margin: 0;
 	font-size: var(--step-2);

@@ -15,6 +15,7 @@ class Controller {
   //************** Fewo Funktionen ***************/
 
   public function renderFeWo($flat){
+    $config = $this->config;
     $current_month = date("m");
     $current_year = date("Y");
     $displayed_flat = $flat; 

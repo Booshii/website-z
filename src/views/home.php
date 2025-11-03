@@ -14,19 +14,9 @@
 	</head>
 	<body>
 		<?php
+			$pageTitle = "Zermützel Ferienwohnungen";
 			require_once TEMPLATE_PATH . "header.php";
 		?> 
-		<!-- <nav class="navbar">
-			<a href="#">Home</a>
-			<a href="#">Ausstattung</a>
-			<a href="#">Bilder</a>
-			<a href="#">Verfügbarkeit und Preise</a>
-			<a href="#">Anreise</a>
-			<a href="#">Gartencafe</a>
-			<a href="#">Instagram</a> 
-		</nav> 
-		-->
-		<!-- <hr class="divider"> -->
 		<main>
 					
 			<!-- <section class="banner-pic-section">
@@ -102,7 +92,7 @@
 						src="https://www.google.com/maps?q=Lindenhof%20Zerm%C3%BCtzel&output=embed">
 					</iframe>
 				</section>
-				<section class="booking-information-section">
+				<section id="booking-section">
 					<h2>Um zu buchen schreiben Sie bitte eine E-Mail oder kontaktieren Sie uns unter</h2>
 					<p>
 						Adresse: Dorfstraße 12, 16827 Zermützel </br>

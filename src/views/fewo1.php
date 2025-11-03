@@ -12,11 +12,12 @@
 	<link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/fewo.css">
 	<link rel="stylesheet" href="/css/calendar.css">
-	<script src="../../js/fewo2.js" defer></script>
+	<script src="../../js/fewo.js" defer></script>
 	<script src="/js/header.js" defer></script>
 </head>
 <body>
 	<?php
+		$pageTitle = "Ferienwohnung 1";
 		require_once TEMPLATE_PATH . "header.php";
 	?>
 
@@ -197,7 +198,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="booking">
+	<section id="booking-section">
 		<h1>Buchen</h1>
 		<p>Telefon: 0173-8545737 oder </br>
 			E-Mail: ferienwohnung@lindenhof-zermuetzel.de

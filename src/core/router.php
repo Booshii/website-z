@@ -76,7 +76,7 @@ class Router {
 		$config = $this->config; 
 		require_once VIEW_PATH . '/home.php';      
 	}
-	private function loadFeWo1(){
+	private function loadFeWo1(){ 
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$controller->renderFeWo(1);

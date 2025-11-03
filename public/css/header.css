@@ -1,4 +1,4 @@
-.header{
+.header {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -9,6 +9,10 @@
     border-bottom: 2px solid var(--color-secondary);
     height: 6rem;
 }
+#site-brand {
+  text-decoration: none;
+  color: inherit;
+}
 #header__h1 {
     font-family: "Pavanam", Arial, sans-serif;
     margin-top: 0.5rem;
@@ -17,15 +21,17 @@
     /* font-size: clamp(0.5rem,5vw,2rem); */
     font-size:var(--step-2);
 }
-.socials{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-width: 180px;
+#menu-btn {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
 }
 
-
-#menu-modal-element{
+/* ************************************* */
+/* ************ Menu Modal ************* */
+/* ************************************* */
+#menu-modal-element {
   position: fixed;
   top: 0;
   left: 0;
@@ -38,16 +44,13 @@
 	max-height: unset;
   background: white;
 }
-#menu-close-button{
+#menu-close-button {
     font-size: 2rem;
+    margin: 10px;
     color: black;
     cursor: pointer;
-}
-#menu-btn{
-    background: none;
     border: none;
-    font-size: 2em;
-    cursor: pointer;
+    background: none;
 }
 nav {
 	display: flex;
@@ -55,7 +58,7 @@ nav {
 	align-items: flex-start;
 	gap: 2rem;
 }
-nav a{
+nav a {
 	padding: 1rem;
 	font-size: var(--step-3);
 	text-decoration: none;
@@ -75,8 +78,6 @@ nav a::after {
   background-color: currentColor;
   transition: width 0.3s ease;
 }
-
-
 nav a:hover::after {
   width: 100%;
 }
