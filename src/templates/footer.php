@@ -3,11 +3,9 @@
 ?>
 
 <footer class="footer">
-    <ul class="footer__ul">
-        <!-- Dinger müssen noch zu links  -->
-        <li>AGB</li>
-        <li>Impressum</li>
-        <li><span>&#169</span>Lindenhof-Zermützel</li>
-    </ul>
-
+    <nav class="footer__nav">
+        <a href="<?= $config['base_url']?>/impress">Impressum</a>
+        <a href="<?= $config['base_url']?>/agb">AGB</a>
+    </nav>
+    <p><span>&#169</span>Lindenhof-Zermützel</p>
 </footer>

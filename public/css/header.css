@@ -52,13 +52,13 @@
     border: none;
     background: none;
 }
-nav {
+.header__nav {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 2rem;
 }
-nav a {
+.header__nav a {
 	padding: 1rem;
 	font-size: var(--step-3);
 	text-decoration: none;
@@ -68,7 +68,7 @@ nav a {
   padding-bottom: 4px; /* Platz für den Strich */
   transition: color 0.3s ease;
 }
-nav a::after {
+.header__nav a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -78,6 +78,6 @@ nav a::after {
   background-color: currentColor;
   transition: width 0.3s ease;
 }
-nav a:hover::after {
+.header__nav a:hover::after {
   width: 100%;
 }

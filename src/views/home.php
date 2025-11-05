@@ -9,7 +9,7 @@
 		<title>Document</title>
 		<link rel="stylesheet" href="/css/home.css">
 		<link rel="stylesheet" href="/css/global.css">
-		<script src="/js/main.js" defer></script>
+		<script src="/js/home.js" defer></script>
 		<script src="/js/header.js" defer></script>
 	</head>
 	<body>

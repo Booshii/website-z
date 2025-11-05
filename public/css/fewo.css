@@ -12,7 +12,6 @@ main{
 	margin-top: 2rem;
 	gap: 4rem;
 	width: clamp(320px, 100%, 1440px); 
-
 }
 
 /* ************************************* */

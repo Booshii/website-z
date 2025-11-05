@@ -14,10 +14,6 @@ linkToContact.addEventListener('click', (event) => {
 	}
 });
 
-// menuModalElement.addEventListener('close', () => {
-//     document.body.classList.remove('modal-open');
-// });
-
 function openMenuModal(){
   menuModalElement.showModal();
 }

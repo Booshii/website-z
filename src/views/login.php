@@ -3,8 +3,6 @@
  * required variables
  * @var array<string> $errors  
  * */
-
-
 ?>
 
 <!DOCTYPE html>
@@ -19,28 +17,29 @@
 <body>
   <div class="login-container">
 		<h1>Login</h1>
-<!-- Login-Formular -->
 		<form id="login-form" action="/login" method="POST">
 			<label for="email">Email</label>
-			<input type="email" id="email" name="email" placeholder="Email" required>
+			<input 
+				type="email" 
+				id="email" 
+				name="email" 
+				placeholder="Email" 
+				required 
+				value="<?= htmlspecialchars($oldEmail ?? '', ENT_QUOTES, 'UTF-8')?>"
+			>
 
-			<br>
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" placeholder="Password" required>
 
-			<br>
 			<button type="submit" name="submit_button" value="user_login">Login</button>
 		</form>
 
-<!-- Anzeige von Fehlermeldungen, falls vorhanden -->
-		<?php if (isset($errors) && !empty($errors)): ?>
+		<?php if (!empty($errors)): ?>
+			<h1>Fehler</h1>
 			<ul class="error-list">
-				<h1>Fehler</h1>
-					<?php foreach ($errors as $error): ?>
-						
-							<li><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></li>
-							
-					<?php endforeach; ?>
+				<?php foreach ($errors as $error): ?>
+						<li><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></li>
+				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
   </div>

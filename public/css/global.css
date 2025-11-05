@@ -65,9 +65,6 @@ body {
   align-items: center;
   /* width: 100%; */
 }
-main{
-  /* width: 80vw; */
-}
 h1{
   font-size: var(--step-5);
   font-family: "AmaticSC", Arial, sans-serif;

@@ -15,7 +15,7 @@
 
 <dialog id="menu-modal-element">
 	<button id="menu-close-button" aria-label="Menü schließen">&times;</button>
-	<nav>
+	<nav class="header__nav">
 		<a href="<?= $config['base_url']?>/home">Startseite</a>
 		<a href="<?= $config['base_url']?>/fewo1">große Ferienwohnung</a>
 		<a href="<?= $config['base_url']?>/fewo2">kleine Ferienwohnung</a>

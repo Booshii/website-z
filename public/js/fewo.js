@@ -137,12 +137,10 @@
       loadImage(currentIndex);
     }
     modalElement.showModal();
-        // document.body.classList.add('modal-open'); // deactivate scrollilng on page
   }
 
   function closeModal(modalElement){
     modalElement.close();
-    // document.body.classList.add('modal-open'); // deactivate scrollilng on page
   }
 
   function loadImage(id){

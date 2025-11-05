@@ -27,8 +27,6 @@ class Router {
 		];
 	}
 
-	
-	// prüft, welche HTTP-Methoden für einen bestimmten Pfad in deinem Router erlaubt sind.
 	private function allowedMethodsForPath(string $requestPath): array {
 		$allowedMethods = []; 
 		foreach ($this->routes as $httpMethod => $pathDefinitions) {
@@ -40,12 +38,9 @@ class Router {
 	}
 
 	public function handleRequest() {
-		// Routing wird mit URI-basiert umgesetzt
-		// Pfad wird aus der ULR extrahiert
 		$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? "/", PHP_URL_PATH);      
 		$method = $_SERVER['REQUEST_METHOD']; 
-		// array_key_exists gibt true oder false zurück 
-		// call_user_func hilft die Funktionenen dynamisch aufzurufen 
+		// call_user_func calls functions dynamic
 		if (isset($this->routes[$method][$requestUri])) {
 			$route = $this->routes[$method][$requestUri];
 			if($route['auth']){
@@ -61,7 +56,7 @@ class Router {
 		} else {
 			$allowedMethods = $this->allowedMethodsForPath($requestUri);
 			if (!empty($allowedMethods)) {
-				// implode verbindet ein array zu einem String
+				// implode converts array to string
 				header("Allow: " . implode(",", $allowedMethods));
 				http_response_code(405);
 				echo "<h1>105 - Method not allowed </h1>";
@@ -92,14 +87,11 @@ class Router {
 		$displayed_month = isset($_GET['month']) ? (int)$_GET['month'] : date("m");
 		$displayed_year = isset($_GET['year']) ? (int)$_GET['year'] : date("Y");
 		$displayed_flat = isset($_GET['flat']) ? (int)$_GET['flat'] : 1; 
-
 		$controller->handleApiRequest($displayed_year, $displayed_month, $displayed_flat);
 	}
 	private function loadDashboard() {
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
-		// holt den anzuzeigenden Monat und Jahr aus den Pfad
-		// wenn keiner angegeben dann wird der aktuelle an renderDashboard übergeben 
 		$displayed_month = isset($_GET['month']) ? (int)$_GET['month'] : date("m");
 		$displayed_year = isset($_GET['year']) ? (int)$_GET['year'] : date("Y");
 		$displayed_flat = isset($_GET['flat']) ? (int)$_GET['flat'] : 1; 
@@ -124,7 +116,6 @@ class Router {
 		$controller = new Controller($this->db, $this->config);
 		$controller->handleFormRequest(); 
 	}
-	// hier müsste noch logik für den login gemacht werden vllt in einer login.php
 	private function handleLoginPost(){
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
