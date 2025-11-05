@@ -1,21 +1,48 @@
 
   /************* DOM-Elements ************** */
-  const select = document.getElementById('select-month-year');
+  const selectMonth = document.getElementById('select-month');
+  const selectYear = document.getElementById('select-year');
   const prevBtn = document.getElementById('prev-month');
   const nextBtn = document.getElementById('next-month');
   const selectFlat = document.getElementById('select-flat');
+  const selects = document.querySelectorAll('select[id^="select-status_"]');
 
-
-  /*************** Functions *************** */
-
-  // redirect
+/***************************************** */
+/************** Functions **************** */
+/***************************************** */
+  /************ Helper ************** */
+  function getYearMonth(){
+    const month = Number(selectMonth.value);
+    const year = Number(selectYear.value);
+    return { month, year }
+  }
   function redirectTo(month, year, flat) {
     window.location.href = `/dashboard?month=${month}&year=${year}&flat=${flat}`;
   }
 
-  /************ EventListener ************** */
+/***************************************** */
+/************ EventListener ************** */
+/***************************************** */
+  /********** flat-dropdown ********** */
+  selectFlat.addEventListener('change', () => {
+    let { month, year } = getYearMonth()
+    const flat = parseInt(selectFlat.value); 
+    redirectTo(month, year, flat);
+  });
+  /********** form-dropdown ********** */
+  selects.forEach(select => {
+      select.addEventListener('change', () => {
+        const id = select.id.split('_').pop(); // splittet vor und nach _
+        const label  = document.getElementById('status-label' + id); 
+        if (!label) return; 
+        label.classList.toggle('label-occupied', select.value !== 'true');
+        label.classList.toggle('label-spare',    select.value === 'true');
+      });
+  });
+
+  /************ Calendar ************** */
   prevBtn.addEventListener('click', () => {
-    let [ month, year ] = select.value.split('-').map(Number);
+    let { month, year } = getYearMonth()
     month--;
     if (month < 1) {
       month = 12;
@@ -26,7 +53,7 @@
   });
 
   nextBtn.addEventListener('click', () => {
-    let [ month, year ] = select.value.split('-').map(Number);
+    let { month, year } = getYearMonth()
     month++;
     if (month > 12){
       month = 1;
@@ -37,32 +64,14 @@
     redirectTo(month, year, flat);
   });
 
-  select.addEventListener('change', () => {
-    const [ month, year ] = select.value.split('-').map(Number);
+  selectMonth.addEventListener('change', () => {
+    let { month, year } = getYearMonth()
     const flat = parseInt(selectFlat.value); 
-    redirectTo(month, year, flat);
+    redirectTo(month, year,flat);
   });
 
-  selectFlat.addEventListener('change', () => {
-    const [ month, year ] = select.value.split('-').map(Number);
+  selectYear.addEventListener('change', () => {
+    let { month, year } = getYearMonth()
     const flat = parseInt(selectFlat.value); 
     redirectTo(month, year, flat);
-  });
-
-  // beim Laden alle Selects durchgehen 
-
-  var selects = document.querySelectorAll('select[id^="select-status_"]');
-
-  selects.forEach(select => {
-      // Event bei Änderungen 
-      select.addEventListener('change', () => {
-          const id = select.id.split('_').pop(); // splittet vor und nach _
-          // holt das zu der id zugehörige label
-          const label  = document.getElementById('status-label' + id); 
-
-          if (!label) return; 
-
-          label.classList.toggle('label-occupied', select.value !== 'true');
-          label.classList.toggle('label-spare',    select.value === 'true');
-      });
   });

@@ -1,14 +1,12 @@
 <?php
-    /** 
-     * required variables
-     * @param int $displayed_month 
-     * @param int $displayed_year
-	 * @param int $displayed_flat
-	 *
-     * @param array $calendar_events  
-     * 
-     * @return string HTML-Tabelle
-     * */
+/**
+	* required variables 
+	* @param int $displayed_month 
+	* @param int $displayed_year
+	* @param int $displayed_flat
+	* @param array $calendar_events  
+	* @return string HTML-Tabelle
+* */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,78 +15,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 		<link rel="stylesheet" href="/css/global.css">
-    	<link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
 		<link rel="stylesheet" href="/css/calendar.css">
-
     <script src="../../js/dashboard.js" defer></script>
 </head>
 <body>
-    
-    <h1 id="title">Kalender bearbeiten</h1>
-<?php
-	echo "<pre>"; 
-		print_r("hallo");
-	print_r($calendar_events); 
+	<main>
+  	<h1 id="title">Wohnung auswählen</h1>
 
-	echo "</pre>"; 
-?>
-		
-    <div id="dropdown-container">
-        <select name="select-flat" id="select-flat">
-            <option value="1"<?= $displayed_flat === 1 ? 'selected' : '' ?>>Wohnung 1</option>
-            <option value="2"<?= $displayed_flat === 2 ? 'selected' : '' ?>>Wohnung 2</option>
-        </select>
-    </div>
+		<select name="select-flat" id="select-flat">
+			<option value="1"<?= $displayed_flat === 1 ? 'selected' : '' ?>>Wohnung 1</option>
+			<option value="2"<?= $displayed_flat === 2 ? 'selected' : '' ?>>Wohnung 2</option>
+		</select>
 
-    <!-- <div class="calendar-settings"> -->
-        <div id="calendar-container">
-            <div class="calendar-nav">
-				<button id='prev-month'>&#8592;</button>
-				<!-- <select name="select-month" id="select-month-year" onchange="updateCalendar()"> -->
-				<select name="select-month" id="select-month-year">
-					<?php
-						// erzeugt die Auswahl für die nächsten 12 Monate
-
-						for ($i = -3; $i <13; $i++){
-							$offset0       = ($displayed_month - 1) + $i;       // 0-basiert
-							$month0        = (($offset0 % 12) + 12) % 12;       // 0..11, immer positiv
-							$option_month  = $month0 + 1;                       // 1..12
-
-							//Jahr berechnen
-							$option_year   = $displayed_year + floor($offset0 / 12);
-							// Label erzeugen
-							$option_monthName = date('F', mktime(0, 0, 0, $option_month, 10));
-							$selected = ($i === 0) ? ' selected' : '';
-							echo "<option value=\"{$option_month}-{$option_year}\"{$selected}>{$option_monthName} {$option_year}</option>";
-						}
-					?>
-				</select>
-				<button id="next-month">&#8594;</button>
-            </div>
-            <div id="calendar">
-                <?php
-
-                    // include '../includes-SRC/functions.php';
-
-                    // aktuellen Monat und Jahr holen und dann die funktion renderCalendar aufrufen 
-                    // $month = 11; 
-                    // $year = 2024; 
-
-                    // die Funktion zum holen der termine sollte hier ausgeführt werden 
-                    // include function für get 
-                    // speichern der Termine aus dem Backend in eine Liste 
-                    // Form erstellen 
-
-                    include_once SRC_PATH . '/templates/calendar.php';
-                    echo renderCalendar($displayed_month, $displayed_year, $calendar_events); 
-
-                    // echo '<pre>';
-                    //     print_r($calendar_events);
-                    // echo '</pre>';
-                ?>
-            </div>            
-        </div>
-        <div id="legend-container">
+		<div class="calendar-container">
+			<div class="calendar-nav">
+				<button id='prev-month'>&laquo;</button>
+				<div class="calendar-select-container">
+					<select name="select-month" id="select-month">
+						<?php
+							$months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+							foreach($months as $key => $m){
+								if($displayed_month  == $key + 1){
+									echo '<option value="' . ($key + 1) . '" selected>' . $m . '</option>'; 
+								} else {
+									echo '<option value="' . ($key + 1) . '">' . $m . '</option>'; 
+								}	
+							}
+						?>
+					</select>
+					<select name="select-year" id="select-year">
+						<?php
+							for ($i = -2; $i < 4; $i++) {
+								$option_year = $displayed_year + $i;
+								if($displayed_year == $option_year) {
+									echo '<option value="' . $option_year . '" selected>' . $option_year . '</option>';
+								} else {
+									echo '<option value="' . $option_year . '">' . $option_year . '</option>';
+								}
+							}
+						?>
+					</select>
+				</div>
+				<button id="next-month">&raquo;</button>
+			</div>
+			<div class="calendar" id="calendar-container">
+				<?php
+					require_once TEMPLATE_PATH . 'calendar.php';
+					echo renderCalendar($displayed_month, $displayed_year, $calendar_events);
+				?>
+			</div>
+			<!-- <div id="legend-container">
             <h1>Legende</h1>
             <div class="legend-item">
               <div class="square-green" ></div>
@@ -98,69 +75,58 @@
 							<div class="square-red" ></div>
 							<h2>Gebucht</h2>
             </div>
-        </div>
-
-        <!-- <div class="calendar-entry-form"> -->
-        <form id="form-container" action="/controller" method="POST" >
-            <div class="form-grid">   
+        </div> -->
+		</div>
+		<div class="form-container">
+			<div class="form-container-head">
 				<h2>Verfügbarkeit</h2>
-				<div></div>
-				<div id="form-grid-description-and-button-container">
-						<h2>Beschreibung</h2>>
-						<button type="submit" name="submit_button" value="save_events">speichern</button>
-						<input type="hidden" name="submited_flat" value="<?= (int)$displayed_flat?>">																																	
-					</div> 
+				<h2>Beschreibung</h2>
+				<button type="submit" form="dashboard-form" name="submit_button" class="form-container__button">speichern</button>
+			</div>
+			<form action="/controller" method="POST" id="dashboard-form">
+				<input type="hidden" name="submited_flat" value="<?= (int)$displayed_flat?>">																																	
 				<?php 
 					$days = 31; 
 					$event_index = 0;
-
 					for($i = 1; $i <= $days; $i++){ 
-						$current_date = (new DateTime("$displayed_year-$displayed_month-$i"))->format('Y-m-d');
-						//formated_date wird in der getOneMonthCalendarEvents() erstellt 
-						// echo "<pre>DEBUG: current_date = $current_date | formatted_date = " . 
-						// ($calendar_events[$event_index]['event_date'] ?? 'Nicht vorhanden') . "</pre>";
-
+						$current_date = (new DateTime("$displayed_year-$displayed_month-$i"))->format('Y-m-d');	
 						if( isset($calendar_events[$event_index]) && $current_date === $calendar_events[$event_index]['event_date']) {
 							$description = $calendar_events[$event_index]['description']; 
 							echo'
 								<input type="hidden" name="dates[]" value="' .$current_date. '" >
-
-								<label for="description' . $i . '" class="label-occupied" id="status-label' . $i . '">' . $i . ' </label>
+								<label for="description' . $i . '" class="label-occupied form-label" id="status-label' . $i . '">' . $i . ' </label>
 								
-								<select name="select_status[' . $current_date . ']" id="select-status_' . $i . '" required>
+								<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
 									<option value=true>Verfügbar</option>
 									<option value=false selected >Belegt</option>
 								</select>
 
-								<input type="text" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
+								<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
 							'; 
-							// warum das hier? 
+
 							if ($event_index < count($calendar_events) - 1) {
 									$event_index++;
 							}
-						}
-						else{
+						} else {
 							echo'
 								<input type="hidden" name="dates[]" value="' .$current_date. '" >
 
-								<label for="description' . $i . '" class="label-spare" id="status-label' . $i . '">' . $i . ' </label>
+								<label for="description' . $i . '" class="label-spare form-label" id="status-label' . $i . '">' . $i . ' </label>
 
-								<select name="select_status[' . $current_date . ']" id="select-status_' . $i . '" required>
+								<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
 									<option value=true>Verfügbar</option>
 									<option value=false>Belegt</option>
 								</select>
 								
-								<input type="text" id="description' . $i . '" name="description[' . $current_date . ']">
+								<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']">
 							'; 
 						}
 					}
-					echo'
-					<button type="submit" name="submit_button" value="save_events">speichern</button>
-					';
 				?>
-            </div>
-        </form>
-        
-    <!-- </div> -->
+			</form>
+			<button type="submit" form="dashboard-form" name="submit_button" class="form-container__button">speichern</button>
+		</div>
+
+	</main>
 </body>
 </html>

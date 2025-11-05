@@ -27,10 +27,10 @@
   const baseUrl = new URL("http://localhost/api/events");
   let currentShownModalImageIndex; // wofür???
   let currentIndex;
+
 /***************************************** */
 /************ EventListener ************** */
 /***************************************** */
-
   /************ Gallery ************** */
   galleryItems.forEach((item, index) => {
     item.addEventListener('click', () => openModal(galleryModalElement, index)); 

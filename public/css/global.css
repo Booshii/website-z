@@ -38,6 +38,7 @@
 /* color-scheme */
   --color-primary:#B9D696;
   --color-secondary:#79A37D;
+  --color-tertiary: #F1B323;
 
   --color-success: #28a745; /* für Erfolgsmeldungen, freie Tage */
   --color-error:   #dc3545; /* für Fehlermeldungen, belegte Tage */
@@ -65,6 +66,7 @@ body {
   align-items: center;
   /* width: 100%; */
 }
+
 h1{
   font-size: var(--step-5);
   font-family: "AmaticSC", Arial, sans-serif;

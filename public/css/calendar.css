@@ -9,7 +9,7 @@
 /*  für die orientierung ganz gut */
 .calendar th, .calendar td {
   border: clamp(2px, 0.7cqi, 3px) solid var(--main-bg);   
-  border-radius: clamp(6px, 2cqi, 12px);
+  border-radius: 6px;
   padding: 0;               /* wichtig für exakte Quadrate */
   box-sizing: border-box; 
 } 

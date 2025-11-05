@@ -1,65 +1,73 @@
-body{
+main{
   display: grid;
   gap: 24px;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: 25% auto;
+  grid-template-rows: auto;
   grid-template-areas: 
       'title title'
       'select select'
       'calendar form '
       'legend form';
-
   margin: 0px;
   padding: 24px;
 }
 #title {
   grid-area: title;
-  border: 1px solid black;
+  margin: 0; 
 }
-#dropdown-container {
+#select-flat {
   grid-area: select;
-  border: 1px solid black;
-}
-#legend-container {
-  grid-area: legend;
-  border: 1px solid black;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 6px;
+  font: 1.5rem bold;
+  width: 100%;
+  font-family: var(--font-secondary);
 }
 
 /* ************************************* */
 /* ******** calendar-container ********* */
 /* ************************************* */
-#calendar-container {
+.calendar-container {
   grid-area: calendar;
-  border: 1px solid black;
-  /* max-width: 200px; */
 }
 .calendar-nav{
-    display: flex;
-    flex-direction: row;
-    width: 100%; 
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 0;
+	width: 100%; 
+	background: transparent; /* kein Hintergrund */
+  border: none; 
+	padding: 0.8rem 0;
+	font-family: var(--font-secondary);
 }
-
-select {
-  padding: 0.5rem;
-  background-color: white;
-  border-radius: 4px;
-  font: 1.5rem bold;
-  width: 100%;
+.calendar-nav button {
+	background: none;
+	border: none;
+	font-size: 1.5rem; 
+	cursor: pointer;
 }
-#prev-month{
-  /* min-width: 80px; */
-}
-#select-month-year{
-
-}
-#next-month{
-
-
+.calendar-select-container select {
+	padding: 0.5rem;
+	background: transparent; /* kein Hintergrund */
+	border: none; 
+	font-size: var(--step-2);
+	font-weight: 600;
+	font-family: var(--font-secondary);
+	width: auto;             /* nur so breit wie Inhalt */
+	padding: 0 0.25rem;
+	text-align: center;
+	cursor: pointer;
 }
 
 /* ************************************* */
 /* ********** legend-container *********** */
 /* ************************************* */
+/* #legend-container {
+  grid-area: legend;
+  border: 1px solid black;
+} */
 /* .legend-item{
   display: flex; 
   flex-direction: row;
@@ -68,38 +76,75 @@ select {
 /* ************************************* */
 /* ********** form-container *********** */
 /* ************************************* */
-#form-container{
+.form-container {
   grid-area: form;
-  border: 1px solid black;
-  width: 100%; 
-  max-width: 800px;
-  margin: 0 auto;
+  container-type: inline-size;  
+  font-family: var(--font-secondary);
 }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 48px 2fr 4fr;
-  grid-auto-rows: 48px ;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-#form-grid-description-and-button-container {
+.form-container-head {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
-  border: 1px solid black;
+  font-size: var(--step-calendar);
+  font-family: var(--font-secondary);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-#form-grid-description-and-button-container button {
-  height: 20px;
-  border: 1px solid black;
-  align-self: flex-end;
+.form-container-head h2 {
+  font-family: inherit;
+  margin: 0;
 }
+.form-container__button {
+  background-color: var(--color-tertiary);
+  font-family: var(--font-secondary);
+  font-size: var(--step-1);
+  border-radius: 6px;
+  border: none;
+  padding: 0.3rem 3rem ;
+  cursor: pointer;
+}
+.form-container__button:hover {
+  filter: brightness(90%);
+}
+#dashboard-form{
+  display: grid;
+  grid-template-columns: 2em 1fr 4fr;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--step-1);
+  margin-bottom: 0.5rem;
+}
+
 /* ********** status-label *********** */
-.label-spare{
+.form-label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  inline-size:100%; 
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+}
+.label-spare {
   background-color: var(--color-success);
 }
-.label-occupied{
+.label-occupied {
   background-color: var(--color-error);
 }
+
+/* ********** select *********** */
+.form__select {
+  height: 100%;
+  width: 100%;
+  font: inherit;
+  background: white;
+  border: 1px solid;
+  border-radius: 6px;
+}
+.form__input {
+  height: 100%;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+
