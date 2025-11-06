@@ -7,27 +7,30 @@ class Repository{
       $this->db = $db; 
   }
 
-  // Helper für den richtigen Tablenamen
+  //**********************************************/
+  //************** Helper Functions **************/
   private function tableForFlat(int $flat): string {
     if (!in_array($flat, [1, 2], true)) {
       throw new InvalidArgumentException("Ungültiger Flat-Wert: $flat");
     }
     return sprintf('`calendar_events_%d`', $flat);
   }
-
-  // Event erstellen 
-  public function createCalendarEvent($date, $description, $flat){
+  
+  //**********************************************/
+  //************** Envent Functions **************/
+  //******** create event  ********/
+  public function createCalendarEvent(string $date, string $description, int $flat): int|false{
     $table = $this->tableForFlat((int)$flat);
     
     $stmt = $this->db->prepare("INSERT INTO $table (`event_date`, `description`) VALUES (?, ?)");
-    if (!$stmt) { // prepare()-Fehlerbehandlung
+    if (!$stmt) { 
       throw new Exception("Fehler beim Vorbereiten des Statements: " . $this->db->error);
     }
     $stmt->bind_param('ss', $date, $description);
 
     if ($stmt->execute()){
       $insertId = $this->db->insert_id;
-      $stmt->close(); // korrekt schließen
+      $stmt->close(); 
       return $insertId; 
     } else {
       $stmt->close();
@@ -35,8 +38,8 @@ class Repository{
     }
   }
 
-  //****** Event aktualisieren  ******/
-  public function updateCalendarEvent($id, $date, $description, $flat) {
+  //******** update event  ********/
+  public function updateCalendarEvent(int $id, string $date, string $description, int $flat): int|false {
     $table = $this->tableForFlat((int)$flat);
       
     $stmt = $this->db->prepare("UPDATE $table SET `event_date` = ?, `description` = ? WHERE `id` = ?"); 
@@ -45,15 +48,15 @@ class Repository{
     }
     $stmt->bind_param('ssi', $date, $description, $id); 
 
-    $affected_rows = $stmt->affected_rows;
     $ok = $stmt->execute();
+    $affected_rows = $stmt->affected_rows;
     $stmt->close();
 
     return $ok ? $affected_rows : false;
   }
 
-  //****** Event löschen  ******/
-  public function deleteCalendarEvent($id, $flat) {
+  //******** delete event  ********/
+  public function deleteCalendarEvent(int $id, int $flat): bool {
     $table = $this->tableForFlat((int)$flat);
       
     $stmt = $this->db->prepare("DELETE FROM $table WHERE `id` = ?");
@@ -62,15 +65,15 @@ class Repository{
     }
     $stmt->bind_param('i', $id);
     
-    $affected_rows = $stmt->affected_rows;
     $ok = $stmt->execute();
+    $affected_rows = $stmt->affected_rows;
     $stmt->close();
 
     return $ok ? $affected_rows : false;
   }
 
-  //****** Event nach ID abrufen   ******/
-  public function getEventById($id, $flat) {
+  //******* get event by id *******/
+  public function getEventById(int $id, int $flat): ?array {
     $table = $this->tableForFlat((int)$flat);
     
     $stmt = $this->db->prepare("SELECT * FROM $table WHERE `id` = ?");
@@ -84,11 +87,11 @@ class Repository{
     $row = $res->fetch_assoc();
     $res->free();
     $stmt->close();
-    return $row;
+    return $row ?: null;
   }
 
-  //****  Event nach Datum abrufen 
-  public function getEventByDate($date, $flat) {
+  //****** get event by date ******/
+  public function getEventByDate(string $date, int $flat): ?int {
     $table = $this->tableForFlat((int)$flat);
 
     $stmt = $this->db->prepare("SELECT `id` FROM $table WHERE `event_date` = ?");
@@ -103,14 +106,12 @@ class Repository{
     $res->free();
     $stmt->close();
 
-    // wenn row mit [id] vorhanden dann wird es zurückgegeben sonst null
     return $row['id'] ?? null;
   }
 
-  // Events von einem Monat nach Datum sortiert?
-  public function getOneMonthCalendarEvents($year, $month, $flat){    
+  //**** get events one month  ****/
+  public function getOneMonthCalendarEvents(int $year, int $month, int $flat): array{    
     $table = $this->tableForFlat((int)$flat);
-    // Validierung der parameter
     $year  = (int)$year;
     $month = (int)$month;
     if ($year < 1970 || $year > 2100) {
@@ -139,25 +140,21 @@ class Repository{
 
     return $events; 
   }
-
-  // Alle Events abrufen
-  public function getAllEvents($flat) {
+  //******* get all events ********/
+  public function getAllEvents(int $flat): array {
     $table = $this->tableForFlat((int)$flat);
-    // hier kommt C10 
     $stmt = $this->db->query("SELECT `id`, `event_date`, `description` FROM $table 
                               ORDER BY `event_date` ASC");
     if (!$stmt) {
       throw new Exception("Fehler bei der Abfrage: " . $this->db->error);
     } 
-    // holt alle Zeilen und gibt die als Array von Arrays zurück 
     $result = $stmt->fetch_all(MYSQLI_ASSOC);
     $stmt->free(); 
     return $result; 
   }
 
   //**********************************************/
-  //************** Login Funktionen **************/
-
+  //************** Login Functions ***************/
   public function getUserByEmail(string $email): ?array {
       $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `email` = ?"); 
       if(!$stmt){
