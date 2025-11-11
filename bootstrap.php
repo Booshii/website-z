@@ -13,49 +13,77 @@ $envFile = BASE_PATH . '/.env';
 
 // Falls eine .env.production existiert, diese bevorzugen
 if (file_exists(BASE_PATH . '/.env.production')) {
-    $envFile = BASE_PATH . '/.env.production';
+	$envFile = BASE_PATH . '/.env.production';
 }
 
 $env = [];
 if (is_file($envFile)) {
-    $env = parse_ini_file($envFile, false, INI_SCANNER_TYPED) ?: [];
+	$env = parse_ini_file($envFile, false, INI_SCANNER_TYPED) ?: [];
 }
+
+//**********************************************/
+//****** Error - / Exception - Logging  ********/
+//**********************************************/
 
 $appDebug = $env['APP_DEBUG'] ?? false;
 
+error_reporting(E_ALL);
+ini_set('log_errors', '1');
+
+
 if ($appDebug) {
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    ini_set('log_errors', '1');
-    error_reporting(E_ALL);
-    
-    // definiert wo die Logdatein gespeichert werden sollen und erstellt Verzeichnis wenn nicht vorhanden 
-    $logDir = BASE_PATH . '/storage/logs';
-    if (!is_dir($logDir)){
-        // 0750: Berechtigungen, Webserver-User muss Besitzer des Ordners sein
-        @mkdir($logDir, 0750, true);
-    }
-    ini_set('error_log', $logDir . '/php_errors_dev.log');
-    
-// PROD: nichts anzeigen nur loggen 
+	ini_set('display_errors', '1');
+	ini_set('display_startup_errors', '1');
 } else {
-    // nichts anzeigen nur loggen 
-    ini_set('display_errors', '0');
-    ini_set('display_startup_errors', '0');
-    ini_set('log_errors', '1');
-    // Fehler loggen, aber Notices/Deprecations unterdrücken
-    error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+	ini_set('display_errors', '0');
+	ini_set('display_startup_errors', '0');
 }
 
+
+function appErrorHandler($errno, $errstr, $errfile, $errline) {
+  $message = "[PHP Error][$errno] $errstr in $errfile:$errline";
+  error_log($message);
+
+  if (ini_get('display_errors')) {
+    echo "<b>Fehler:</b> $errstr in $errfile:$errline"; 
+  }
+  return true; 
+}
+
+function appExceptionHandler(Throwable $e) {
+  $message = "[Exception] " . $e->getMessage() . " in " . $e->getFile() . ":" . $e->getLine();
+  error_log($message);
+
+  if (ini_get('display_errors')) {
+    echo "<b>Exception:</b> " . $e->getMessage() . "<br>";
+  }
+}
+
+function appShutdownHandler() {
+  $error = error_get_last();
+  if ($error !== null) {
+    $message = "[FATAL][{$error['type']}] {$error['message']} in {$error['file']}:{$error['line']}";
+    error_log($message);
+  }
+}
+
+// register Handler
+set_error_handler('appErrorHandler');
+set_exception_handler('appExceptionHandler');
+register_shutdown_function('appShutdownHandler');
+
+//**********************************************/
+//*********** App Configuration ****************/
+//**********************************************/
 $config = [
-    'app_name' => 'MeinKalender',
-    'default_language' => 'de',
-    'base_url' => $env['BASE_URL'] ?? 'http://localhost',
-    // Beispiel: DB aus .env
-    'db' => [
-        'host' => $env['DB_HOST'] ?? '',
-        'user' => $env['DB_USER'] ?? 'tim123',
-        'pass' => $env['DB_PASS'] ?? 'tim123my',
-        'name' => $env['DB_NAME'] ?? 'website-z'
-    ]
+	'app_name' => 'MeinKalender',
+	'default_language' => 'de',
+	'base_url' => $env['BASE_URL'] ?? 'http://localhost',
+
+	'db' => [
+		'host' => $env['DB_HOST'] ?? '',
+		'user' => $env['DB_USER'] ?? 'tim123',
+		'pass' => $env['DB_PASS'] ?? 'tim123my',
+		'name' => $env['DB_NAME'] ?? 'website-z'
+	]
 ];

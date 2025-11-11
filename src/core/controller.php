@@ -7,22 +7,35 @@ class Controller {
   private $repository; 
   private $config; 
   
-  public function __construct($db, $config) {
+  public function __construct(mysqli $db, array $config) {
     $this->repository = new Repository($db); 
     $this->config = $config; 
   }
 
   //**********************************************/
+  //************* Helper Functions ***************/
+  //**********************************************/
+  public function assertValidFlat(int $flat): void {
+    if (!in_array($flat, [1, 2], true)) {
+      http_response_code(404);
+      echo 'Unbekannte Ferienwohnung.';
+      exit();
+    }
+  }
+
+  //**********************************************/
   //************** Fewo Functions ****************/
   //**********************************************/
-  public function renderFeWo($flat){
-    $config = $this->config;
+  public function renderFeWo(int $flat): void {
+    $this->assertValidFlat($flat);
+    
     $current_month = date("m");
     $current_year = date("Y");
+
+    $config = $this->config;
     $displayed_flat = $flat; 
     $calendar_events = $this->repository->getOneMonthCalendarEvents($current_year, $current_month, $flat);
-    // hier könnten noch fehler abgefangen werden wenn flat nicht int und oder 1 oder 2 
-    // nochmal gucken wie das im repo gemacht wird
+
     if((int)$flat == 1){
       require_once VIEW_PATH . '/fewo1.php';
     } else {
@@ -33,27 +46,16 @@ class Controller {
   //**********************************************/
   //************ Dashboard Functions *************/
   //**********************************************/
-  public function renderDashboard($displayed_month, $displayed_year, $flat){
-    // session hier überhaupt nötig da es ja da sein müsste wenn diese Funktion aufgerufen wird
+  public function renderDashboard(int $displayed_month, int $displayed_year, int $flat): void {
+
     $config = $this->config;
     $displayed_flat = $flat; 
     $calendar_events = $this->repository->getOneMonthCalendarEvents($displayed_year, $displayed_month, $displayed_flat);
-       
-    //*** Logik wenn man mehr mit Sessions arbetien will um Datenbank zugriffe zu reduzieren ***
-    //**************************************************************************************** */
 
-    // die ursprünglichen Daten speichern wenn sie nicht schon vorhanden sind ? 
-    // if (!isset($_SESSION['original_calendar_events'])) {
-    //   $calendar_events = $this->repository->getOneMonthCalendarEvents($current_year, $current_month);
-    //   $_SESSION['original_calendar_events'] = $calendar_events; 
-    // }
-
-    // // wenn Daten vorhanden in $calendar_events speichern 
-    // $calendar_events = $_SESSION['original_calendar_events'];
     include VIEW_PATH . 'dashboard.php'; 
   }
   
-  public function handleFormRequest() {
+  public function handleFormRequest(): void {
     // Guard clause: invalid REQUEST_METHOD
     if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
       echo json_encode(['error' => 'Ungültige Anfragemethode']); 
@@ -99,7 +101,13 @@ class Controller {
     require VIEW_PATH . '/login.php'; 
   }
 
-  public function handleLogin(){
+  public function handleLogin(): void {
+     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+      http_response_code(405);
+      echo 'Ungültige Anfragemethode.';
+      return;
+    }
+
     $errors = []; 
     $emailRaw = $_POST['email'] ?? '';
     $passwordRaw = $_POST['password'] ?? '';
@@ -132,7 +140,9 @@ class Controller {
     if(session_status() === PHP_SESSION_NONE){
       session_start();
     }
-    // save session redirect to dashboard
+    
+    session_regenerate_id(true);
+    
     $_SESSION['user_id'] = $user_database['id'];
     header("Location: /dashboard", true); 
     exit();
@@ -141,7 +151,7 @@ class Controller {
 //********************************************/
 //************** API Functions ***************/
 //********************************************/
-  public function handleApiRequest($year, $month, $flat){
+  public function handleApiRequest(int $year, int $month, int $flat): void {
     header('Content-Type: text/html; charset=utf-8');
     try {
       $events = $this->repository->getOneMonthCalendarEvents($year, $month, $flat);
