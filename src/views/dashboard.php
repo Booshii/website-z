@@ -6,6 +6,7 @@
 	* @param int $displayed_flat
 	* @param array $calendar_events  
 	* @return string HTML-Tabelle
+  * @var string $csrfToken
 * */
 ?>
 <!DOCTYPE html>
@@ -123,6 +124,9 @@
 						}
 					}
 				?>
+				<input type="hidden" name="csrf_token"
+					value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>" 	
+				>
 			</form>
 			<button type="submit" form="dashboard-form" name="submit_button" class="form-container__button">speichern</button>
 		</div>

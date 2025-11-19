@@ -26,7 +26,10 @@ class Router {
 			]
 		];
 	}
-
+	
+	//**********************************************/
+  //************* Helper Functions ***************/
+  //**********************************************/
 	private function allowedMethodsForPath(string $requestPath): array {
 		$allowedMethods = []; 
 		foreach ($this->routes as $httpMethod => $pathDefinitions) {
@@ -37,36 +40,64 @@ class Router {
 		return $allowedMethods;
 	}
 
-	public function handleRequest() {
+	private function ensureSession(): void
+	{
+		if (session_status() !== PHP_SESSION_NONE){
+			return;
+		}
+
+		$session_config = $this->config['session'];
+		session_name($session_config['name']);
+		session_set_cookie_params([
+			'lifetime' => $session_config['cookie_lifetime'],
+			'secure' => $session_config['cookie_secure'],
+			'httponly' => $session_config['cookie_httponly'],
+			'samesite' => $session_config['cookie_samesite'],
+		]);
+		session_start(); 
+	}
+	// token validierung und erstellen lieber im Controller
+	// private function ensureCsrfToken(): string {
+	// 	if (empty($_SESSION['csrf_token'])) {
+	// 		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  //   }
+	// 	return $_SESSION['csrf_token'];
+	// }
+
+	//*****************************************/
+  //******* handleRequest Functions *********/
+  //*****************************************/
+	public function handleRequest(): void {
 		$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? "/", PHP_URL_PATH);      
 		$method = $_SERVER['REQUEST_METHOD']; 
-		// call_user_func calls functions dynamic
-		if (isset($this->routes[$method][$requestUri])) {
-			$route = $this->routes[$method][$requestUri];
-			if($route['auth']){
-				if(session_status() === PHP_SESSION_NONE){
-					session_start(); 
-				}
-				if(!isset($_SESSION["user_id"])){
-					header("Location: /login", true); 
-					exit(); 
-				}
-			}     
-			call_user_func($route['callback']);
-		} else {
+
+		if(!isset($this->routes[$method][$requestUri])) {
 			$allowedMethods = $this->allowedMethodsForPath($requestUri);
 			if (!empty($allowedMethods)) {
 				// implode converts array to string
 				header("Allow: " . implode(",", $allowedMethods));
 				http_response_code(405);
 				echo "<h1>105 - Method not allowed </h1>";
-			} else {
-				$this->pageNotFound();
 			}
+			$this->pageNotFound();
+			return;
 		}
+
+		$route = $this->routes[$method][$requestUri];
+		if(!empty($route['auth'])){
+			$this->ensureSession();
+			if(!isset($_SESSION["user_id"])){
+					header("Location: /login", true); 
+					exit(); 
+				}
+		}
+
+		call_user_func($route['callback']);
 	}
 
-	// GET Funktionen 
+  //*****************************************/
+  //************ GET Functions **************/
+  //*****************************************/
 	private function loadHomePage(){
 		$config = $this->config; 
 		require_once VIEW_PATH . '/home.php';      
@@ -90,6 +121,7 @@ class Router {
 		$controller->handleApiRequest($displayed_year, $displayed_month, $displayed_flat);
 	}
 	private function loadDashboard() {
+		$this->ensureSession();
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$displayed_month = isset($_GET['month']) ? (int)$_GET['month'] : date("m");
@@ -99,6 +131,12 @@ class Router {
 	}
 
 	private function loadLogin() {
+		$this->ensureSession();
+		//create token
+		if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+		$csrfToken = $_SESSION['csrf_token'];
 		require_once VIEW_PATH . '/login.php';
 	}
 	private function loadImpress(){
@@ -110,13 +148,16 @@ class Router {
 		echo "<h1>404 - Seite nicht gefunden</h1>";
 	}
 
-	// POST Funktionen 
+  //*****************************************/
+  //************ POST Functions *************/
+  //*****************************************/
 	private function handleControllerPost(){
 		require_once CORE_PATH . '/controller.php'; 
 		$controller = new Controller($this->db, $this->config);
 		$controller->handleFormRequest(); 
 	}
 	private function handleLoginPost(){
+		$this->ensureSession(); 
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$controller->handleLogin();

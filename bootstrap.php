@@ -85,5 +85,13 @@ $config = [
 		'user' => $env['DB_USER'] ?? 'tim123',
 		'pass' => $env['DB_PASS'] ?? 'tim123my',
 		'name' => $env['DB_NAME'] ?? 'website-z'
-	]
+  ],
+  'session' => [
+    'name' =>'website-z_session',
+    'cookie_lifetime' => 0,
+    'cookie_secure' => true,
+    'cookie_httponly' => true,
+    'cookie_samesite' => 'Strict',
+  ],
 ];
+

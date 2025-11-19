@@ -20,7 +20,7 @@
     // $URL = explode("/", $_GET['url']); 
     // show($URL); 
 
-    // session_start(); 
+   
     require dirname(__DIR__) . '/bootstrap.php';
     
     require_once CORE_PATH . "/App.php"; 

@@ -2,6 +2,7 @@
 /** 
  * required variables
  * @var array<string> $errors  
+ * @var string $csrfToken
  * */
 ?>
 
@@ -31,6 +32,9 @@
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" placeholder="Password" required>
 
+			<input type="hidden" name="csrf_token"
+				value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>" 	
+			>
 			<button type="submit" name="submit_button" value="user_login">Login</button>
 		</form>
 
