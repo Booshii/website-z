@@ -2,11 +2,11 @@
 
 class Router {
 
-	private $db; 
-	private $routes =[]; 
-	private $config; 
+	private mysqli $db; 
+	private array $routes =[]; 
+	private array $config; 
 
-	public function __construct($db, $config){
+	public function __construct(mysqli $db, array $config) {
 		$this->db = $db;
 		$this->config = $config; 
 		$this->routes = [
@@ -57,18 +57,19 @@ class Router {
 		session_start(); 
 	}
 	// token validierung und erstellen lieber im Controller
-	// private function ensureCsrfToken(): string {
-	// 	if (empty($_SESSION['csrf_token'])) {
-	// 		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-  //   }
-	// 	return $_SESSION['csrf_token'];
-	// }
+// private function ensureCsrfToken(): string {
+// 	if (empty($_SESSION['csrf_token'])) {
+// 		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+//   }
+// 	return $_SESSION['csrf_token'];
+// }
 
 	//*****************************************/
   //******* handleRequest Functions *********/
   //*****************************************/
 	public function handleRequest(): void {
-		$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? "/", PHP_URL_PATH);      
+		$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? "/", PHP_URL_PATH);    
+		$requestUri = rtrim($requestUri, '/') ?: '/';  
 		$method = $_SERVER['REQUEST_METHOD']; 
 
 		if(!isset($this->routes[$method][$requestUri])) {
@@ -77,7 +78,8 @@ class Router {
 				// implode converts array to string
 				header("Allow: " . implode(",", $allowedMethods));
 				http_response_code(405);
-				echo "<h1>105 - Method not allowed </h1>";
+				echo "<h1>405 - Method not allowed </h1>";
+				return;
 			}
 			$this->pageNotFound();
 			return;
@@ -87,7 +89,7 @@ class Router {
 		if(!empty($route['auth'])){
 			$this->ensureSession();
 			if(!isset($_SESSION["user_id"])){
-					header("Location: /login", true); 
+					header("Location: /login", true, 302); 
 					exit(); 
 				}
 		}
@@ -98,21 +100,21 @@ class Router {
   //*****************************************/
   //************ GET Functions **************/
   //*****************************************/
-	private function loadHomePage(){
+	private function loadHomePage(): void{
 		$config = $this->config; 
 		require_once VIEW_PATH . '/home.php';      
 	}
-	private function loadFeWo1(){ 
+	private function loadFeWo1(): void{ 
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$controller->renderFeWo(1);
 	}
-	private function loadFeWo2(){
+	private function loadFeWo2(): void{
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$controller->renderFeWo(2);
 	}
-	private function sendEventsToFrontend(){
+	private function sendEventsToFrontend(): void{
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
 		$displayed_month = isset($_GET['month']) ? (int)$_GET['month'] : date("m");
@@ -120,7 +122,7 @@ class Router {
 		$displayed_flat = isset($_GET['flat']) ? (int)$_GET['flat'] : 1; 
 		$controller->handleApiRequest($displayed_year, $displayed_month, $displayed_flat);
 	}
-	private function loadDashboard() {
+	private function loadDashboard(): void {
 		$this->ensureSession();
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);
@@ -130,20 +132,24 @@ class Router {
 		$controller->renderDashboard($displayed_month, $displayed_year, $displayed_flat); 
 	}
 
-	private function loadLogin() {
+	private function loadLogin(): void {
 		$this->ensureSession();
-		//create token
+		if (isset($_SESSION['user_id'])) {
+        header('Location: /dashboard', true, 302);
+        exit;
+    }
+		// gucken ob ich das lieber in den Controller packe 
 		if (empty($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
 		$csrfToken = $_SESSION['csrf_token'];
 		require_once VIEW_PATH . '/login.php';
 	}
-	private function loadImpress(){
+	private function loadImpress(): void{
 		require_once VIEW_PATH . '/impress.php';
 	}
 
-	private function pageNotFound() {
+	private function pageNotFound(): void {
 		http_response_code(404);
 		echo "<h1>404 - Seite nicht gefunden</h1>";
 	}
@@ -151,12 +157,12 @@ class Router {
   //*****************************************/
   //************ POST Functions *************/
   //*****************************************/
-	private function handleControllerPost(){
+	private function handleControllerPost(): void{
 		require_once CORE_PATH . '/controller.php'; 
 		$controller = new Controller($this->db, $this->config);
 		$controller->handleFormRequest(); 
 	}
-	private function handleLoginPost(){
+	private function handleLoginPost(): void{
 		$this->ensureSession(); 
 		require_once CORE_PATH . '/controller.php';
 		$controller = new Controller($this->db, $this->config);

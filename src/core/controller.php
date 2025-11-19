@@ -131,22 +131,15 @@ class Controller {
 //************** Login Functions ***************/
 //**********************************************/
   public function renderLogin(array $errors = [], string $oldEmail = ''): void{
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-
-    $csrfToken = $_SESSION['csrf_token'];
+    $csrfToken = $this->ensureCsrfToken();
     require VIEW_PATH . '/login.php'; 
   }
 
   public function handleLogin(): void {
-    $tokenFromPost = $_POST['csrf_token'] ?? null;
-    $tokenFromSession = $_SESSION['csrf_token'] ?? null;
 
-    if (!$tokenFromPost || !$tokenFromSession || !hash_equals($tokenFromPost, $tokenFromSession)) {
+    if (!$this->validateCsrfToken()) {
       http_response_code(403);
       echo 'Ungültiges CSRF-Token.';
-      return;
     }
 
     $errors = []; 
