@@ -1,38 +1,58 @@
 .header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    padding: 0 24px;
-    margin: 0;
-    border-bottom: 2px solid var(--color-secondary);
-    height: 6rem;
+  position: relative;
+  width: 100%;
+  z-index: 20;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-content: center; */
+  padding: 10px 24px;
+  border-bottom: 2px solid var(--color-secondary);
+  /* height: 6rem; */
 }
 #site-brand {
   text-decoration: none;
   color: inherit;
+  line-height: 1;  
 }
 #header__h1 {
-    font-family: "Pavanam", Arial, sans-serif;
-    margin-top: 0.5rem;
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  margin: 0;
 }
 #header__h1__span {
-    /* font-size: clamp(0.5rem,5vw,2rem); */
-    font-size:var(--step-2);
+  font-size:var(--step-2);
 }
+#header-redirections {
+  display: flex;     
+  flex-direction: row ;
+  align-items: center;    
+  gap: 20px;               
+  text-decoration: none;   
+  color: inherit;  
+}
+.header-redirections__img {
+  display:block; 
+  width: 35px; 
+  height: 35px;
+}
+/* .header-redirections__img2 {
+    
+  width: 35px; 
+  height: 55px;
+} */
 #menu-btn {
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
 }
 
 /* ************************************* */
 /* ************ Menu Modal ************* */
 /* ************************************* */
 #menu-modal-element {
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
   border: none;
@@ -43,28 +63,51 @@
 	max-width: unset;
 	max-height: unset;
   background: white;
+  font-weight: 600;
+  font-family: var(--font-primary); */
+  position: absolute;
+  /* definiert die position top right bottom left*/
+  /* inset: 100% 0 auto auto; */
+  inset: auto;
+  top: 90%;
+  right: 0;
+  margin: 0 24px;
+  padding: 0px;
+  border: none;
+  max-width: none;
+  max-height: none;
+  transform: none;   
+  background: transparent;      
 }
-#menu-close-button {
-    font-size: 2rem;
-    margin: 10px;
-    color: black;
-    cursor: pointer;
-    border: none;
-    background: none;
+.dialog-inner {
+  border-radius: 8px;
+  width: max-content;
+  height: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  background-color: var(--main-bg);
 }
+/* #menu-close-button {
+  font-size: 2rem;
+  margin: 10px;
+  color: black;
+  cursor: pointer;
+  border: none;
+  background: none;
+} */
 .header__nav {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	gap: 2rem;
+  padding: 1.5em;
+	/* align-items: flex-start;
+	gap: 2rem; */
 }
 .header__nav a {
-	padding: 1rem;
-	font-size: var(--step-3);
+	font-size: var(--step-1);
 	text-decoration: none;
 	position: relative;
   text-decoration: none;
   color: black;
+  padding-top: 0.5em;
   padding-bottom: 4px; /* Platz für den Strich */
   transition: color 0.3s ease;
 }
@@ -80,4 +123,12 @@
 }
 .header__nav a:hover::after {
   width: 100%;
+}
+
+@media (max-width: 600px) {
+  #header__h1__span {
+     display: block;       /* jetzt eigene Zeile */
+    margin-top: 0;    /* Abstand zwischen LINDENHOF und der zweiten Zeile */
+    line-height: 1;  
+  }
 }

@@ -27,6 +27,20 @@
   const baseUrl = new URL("http://localhost/api/events");
   let currentShownModalImageIndex; // wofür???
   let currentIndex;
+  let lightboxImagesCache = null;
+  //   { full: "pics/apt01/apt01-bedroom-01.avif", alt: "Schlafzimmer-1"},
+  //   { full: "pics/apt01/apt01-hall-01.avif", alt: "Flur"},
+  //   { full: "pics/apt01/apt01-kitchen-01.avif", alt: "Küche"},
+  //   { full: "pics/apt01/apt01-livingroom-01.avif", alt: "Wohnzimmer-1"},
+  //   { full: "pics/apt01/apt01-livingroom-02.avif", alt: "Wohnzimmer-2"},
+  //   { full: "pics/apt01/apt01-bath-01.avif", alt: "Bad"},
+  //   { full: "pics/apt01/apt01-outside-01.avif", alt: "Draußen-1"},
+  //   { full: "pics/apt01/apt01-upstairs-02.avif", alt: "Oben-2"},
+  //   { full: "pics/apt01/apt01-upstairs-03.avif", alt: "Oben-3"},
+  //   { full: "pics/apt01/apt01-upstairs-01.avif", alt: "Oben-1"},
+  //   { full: "pics/apt01/apt01-outside-03.avif", alt: "Draußen-3"},
+  //   { full: "pics/apt01/apt01-outside-02.avif", alt: "Draußen-2"},
+  // ]
 
 /***************************************** */
 /************ EventListener ************** */
@@ -91,6 +105,19 @@
     const year = Number(selectYear.value);
     return { month, year }
   }
+  function getLightboxImages() {
+    if (lightboxImagesCache) {
+      return lightboxImagesCache;
+    }
+    const lightboxImagesJsonElement = document.getElementById("image-json");
+    if (!lightboxImagesJsonElement) {
+      throw new Error('image-json not found');
+    }
+    const lightboxImagesJson = JSON.parse(lightboxImagesJsonElement.textContent)
+    lightboxImagesCache = lightboxImagesJson.lightboxImages;
+    return lightboxImagesCache;
+  }
+
   /************ Calendar ************** */
   async function updateCalendar(month, year, flat) {
     month = parseInt(month, 10);
@@ -140,33 +167,43 @@
   }
 
   function closeModal(modalElement){
+    currentImageId = -1;
+    galleryModalImage.removeAttribute("src");
+    galleryModalImage.removeAttribute("alt");
     modalElement.close();
   }
 
   function loadImage(id){
-    const srcFullImage = galleryItems[id].dataset.full || galleryItems[id].src;
+    const lightboxImages = getLightboxImages();
+    const srcFullImage = lightboxImages[id].full;
     const img = new Image(); 
     img.onload = () => {
-        galleryModalImage.src = srcFullImage; 
-        galleryModalImage.alt = galleryItems[id].alt || '';
-    }
+      galleryModalImage.src = srcFullImage; 
+      galleryModalImage.alt = lightboxImages[id].alt || '';
+    };
+    img.onerror = () => {
+      console.error("Bild konnte nicht geladen werden:", srcFullImage);
+    };
     img.src = srcFullImage;
     updateCounter();
   }
 
   function updateCounter(){
-    let total = galleryItems.length; 
+    const lightboxImages = getLightboxImages();
+    let total = lightboxImages.length; 
     galleryModalCounter.textContent = `${currentIndex + 1} / ${total}`;
     galleryModalElement.setAttribute('aria-label', `Bild ${currentIndex + 1} von ${total}`);
   }
 
   function showNextImage(){
-    currentIndex = (currentIndex < galleryItems.length - 1) ? currentIndex + 1 : 0; 
+    const lightboxImages = getLightboxImages();
+    currentIndex = (currentIndex < lightboxImages.length - 1) ? currentIndex + 1 : 0; 
     loadImage(currentIndex);
   }
 
   function showPrevImage(){
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : galleryItems.length - 1;
+    const lightboxImages = getLightboxImages();
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : lightboxImages.length - 1;
     loadImage(currentIndex);
   }
 

@@ -1,10 +1,11 @@
-const navigationItem = document.getElementById('menu-btn');
+const menuModalButton = document.getElementById('menu-btn');
 const menuModalElement = document.getElementById('menu-modal-element')
-const menuCloseButton = document.getElementById('menu-close-button');
+// const menuCloseButton = document.getElementById('menu-close-button');
 const linkToContact = document.getElementById('link-to-contact');
+// menuCloseButton.addEventListener('click', closeMenuModal);
 
-menuCloseButton.addEventListener('click', closeMenuModal);
-navigationItem.addEventListener('click', openMenuModal);
+
+menuModalButton.addEventListener('click', openMenuModal);
 linkToContact.addEventListener('click', (event) => {
 	event.preventDefault();
 	closeMenuModal();
@@ -14,11 +15,30 @@ linkToContact.addEventListener('click', (event) => {
 	}
 });
 
-function openMenuModal(){
-  menuModalElement.showModal();
+
+function openMenuModal(event){
+	event.stopPropagation();
+
+	if (menuModalElement.open) {
+		closeMenuModal()
+	}
+
+  menuModalElement.show();
+	document.addEventListener('click', clickOutsideToClose)
 }
 function closeMenuModal() {
   menuModalElement.close();
+	document.removeEventListener('click', clickOutsideToClose);
+}
+
+function clickOutsideToClose(event) {
+	const clickInsideDialog = menuModalElement.contains(event.target);
+	const clickMenuButton = menuModalButton.contains(event.rarget);
+
+	if (!clickInsideDialog && !clickMenuButton) {
+		closeMenuModal();
+	}
+
 }
 
 

@@ -14,6 +14,25 @@
 	<script src="../../js/fewo.js" defer></script>
 	<script src="/js/header.js" defer></script>
 </head>
+<!-- 		"flat": 1, -->
+<script type="application/json" id="image-json">
+	{
+		"lightboxImages": [
+			{ "full": "pics/apt01/apt01-bedroom-01.avif", "alt": "Schlafzimmer-1"},
+			{ "full": "pics/apt01/apt01-hall-01.avif", "alt": "Flur"},
+			{ "full": "pics/apt01/apt01-kitchen-01.avif", "alt": "Küche"},
+			{ "full": "pics/apt01/apt01-livingroom-01.avif", "alt": "Wohnzimmer-1"},
+			{ "full": "pics/apt01/apt01-livingroom-02.avif", "alt": "Wohnzimmer-2"},
+			{ "full": "pics/apt01/apt01-bath-01.avif", "alt": "Bad"},
+			{ "full": "pics/apt01/apt01-outside-01.avif", "alt": "Draußen-1"},
+			{ "full": "pics/apt01/apt01-upstairs-02.avif", "alt": "Oben-2"},
+			{ "full": "pics/apt01/apt01-upstairs-03.avif", "alt": "Oben-3"},
+			{ "full": "pics/apt01/apt01-upstairs-01.avif", "alt": "Oben-1"},
+			{ "full": "pics/apt01/apt01-outside-03.avif", "alt": "Draußen-3"},
+			{ "full": "pics/apt01/apt01-outside-02.avif", "alt": "Draußen-2"}
+		]
+	}
+</script>
 <body>
 	<?php
 		$pageTitle = "Ferienwohnung 1";
@@ -23,14 +42,14 @@
 	<main>
 		<section class="picture-gallery-section">
 			<div class="pictures-container">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="1">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="2">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="3">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="4">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="5">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="6">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="7">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="8">
+				<img src="pics/apt01/tiles/apt01-bedroom-01-tile.avif" alt="Schlafzimmer" class="gallery-item" data-index="1">
+				<img src="pics/apt01/tiles/apt01-hall-01-tile.avif" alt="Flur" class="gallery-item" data-index="2">
+				<img src="pics/apt01/tiles/apt01-kitchen-01-tile.avif" alt="Küche" class="gallery-item" data-index="3">
+				<img src="pics/apt01/tiles/apt01-livingroom-01-tile.avif" alt="Haus" class="gallery-item" data-index="4">
+				<img src="pics/apt01/tiles/apt01-livingroom-02-tile.avif" alt="Haus" class="gallery-item" data-index="5">
+				<img src="pics/apt01/tiles/apt01-bath-01-tile.avif" alt="Haus" class="gallery-item" data-index="6">
+				<img src="pics/apt01/tiles/apt01-outside-01-tile.avif" alt="Haus" class="gallery-item" data-index="7">
+				<img src="pics/apt01/tiles/apt01-upstairs-02-tile.avif" alt="Haus" class="gallery-item" data-index="8">
 			</div>
 			<button id="gallery-more-button" > <strong>Mehr</strong> (8) <span class="plus">&#43</span></button>
 		</section>
@@ -45,7 +64,7 @@
 							<li>Kamin</li>
 							<li>TV(mit HDMI und USB-Anschluss)</li>
 							<li>WLAN</li>
-							<li>Spiele und Bücher (Kinder- und Jugendbücher, Romane)</li>
+							<li>Spiele und Bücher </li>
 							<li>Schlafsofa</li>
 							<li>Wander- und Fahrradkarten</li>
 						</ul> 
@@ -55,18 +74,19 @@
 						<ul>
 							<li>Esstisch und Stühle für 4 Personen(+2 Klappstühle)</li>
 							<li>Kühlschrank mit Gefrierfach</li>
-							<li>Ceranfeld und Herd (mit Blechen, Springform, Muffinform)</li>
+							<li>Ceranfeld und Herd </li>
+							<!-- <li>Ceranfeld und Herd (mit Blechen, Springform, Muffinform)</li> -->
 							<li>Kaffeemaschine, French Press und Milchschäumer</li>
-							<li>Toaster</li>
-							<li>Wasserkocher</li>
-							<li>Messerblock</li>
+							<li>Toaster, Wasserkocher, Messerblock</li>
+							<!-- <li>Wasserkocher</li>
+							<li>Messerblock</li> -->
 							<li>Grundausstattung Geschirr und Besteck und Kochutensilien</li>
 							<li>Topfset mit großem Topf</li>
 							<li>Pfannen und Auflaufformen</li>
 							<li>große Schüssel, Rührschüssel </li>
 							<li>Nudelsieb, Reibe</li>
 							<li>Mixer, Pürierstab, Zerkleinerer</li>
-							<li>Reinigungszeug</li>
+							<!-- <li>Reinigungszeug</li> -->
 						</ul> 
 					</div>
 					<div class="equipment-terasse">
@@ -86,8 +106,7 @@
 							<li>Fenster</li>
 							<li>Handtücher</li>
 							<li>Waschmaschine</li>
-							<li>Föhn</li>
-							<li>Seife</li>
+							<li>Föhn, Seife</li>
 						</ul> 
 					</div>
 				<div class="equipment-schlafzimmer">
@@ -121,7 +140,7 @@
 	</section>
 	<section class="availability-prices-section">
 		<div class="availability-prices-container">
-				<div class="availability-container">
+			<div class="availability-container">
 				<h1>VERFÜGBARKEIT</h1>
 				<div class="calendar-container">
 					<div class="calendar-nav">
@@ -199,11 +218,13 @@
 	</section>
 	<section id="booking-section">
 		<h1>Buchen</h1>
-		<p>Telefon: 0173-8545737 oder </br>
-			E-Mail: ferienwohnung@lindenhof-zermuetzel.de
-		</p>
+			<p id="booking-section__p">
+				Telefon: 0173-8545737 oder </br>
+				E-Mail: ferienwohnung@lindenhof-zermuetzel.de
+			</p>
 	</section>
 	</main>
+
 	<dialog id="equipment-modal-element">
 		<header class="equipment-modal__header">
 			<h1 id="equipment-modal__header__h1">Ferienwohnung 1</h1>

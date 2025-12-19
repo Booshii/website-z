@@ -76,6 +76,10 @@
                 $classes[] = 'today';
             }
 
+            if(in_array('occupied',$classes)) {
+                $day_num = '&#10005;';
+            }
+
             $calendar_html .= '<td class="'.implode(' ', $classes).'">';
             $calendar_html .= '<time datetime="'.$date_key.'">'.$day_num.'</time>';
             $calendar_html .= '</td>';

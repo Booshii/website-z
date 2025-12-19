@@ -76,7 +76,6 @@ class Controller {
   
   public function handleFormRequest(): void {
 
-
     if (!$this->validateCsrfToken()) {
       http_response_code(403);
       echo 'Ungültiges CSRF-Token.';

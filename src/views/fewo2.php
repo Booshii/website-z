@@ -15,22 +15,46 @@
 	<script src="../../js/fewo.js" defer></script>
 	<script src="/js/header.js" defer></script>
 </head>
+<!-- 		"flat": 2, -->
+<script type="application/json" id="image-json">
+	{
+		"lightboxImages": [
+			{ "full": "pics/apt02/apt02-bath-01.avif", "alt": "Bad-1"},
+			{ "full": "pics/apt02/apt02-bath-02.avif", "alt": "Bad-2"},
+			{ "full": "pics/apt02/apt02-bath-03.avif", "alt": "Bad-3"},
+			{ "full": "pics/apt02/apt02-bedroom-01.avif", "alt": "Schlafzimmer-1"},
+			{ "full": "pics/apt02/apt02-bedroom-02.avif", "alt": "Schlafzimmer-2"},
+			{ "full": "pics/apt02/apt02-kitchen-01.avif", "alt": "Küche-1"},
+			{ "full": "pics/apt02/apt02-kitchen-02.avif", "alt": "Küche-2"},
+			{ "full": "pics/apt02/apt02-livingroom-01.avif", "alt": "Wohnzimmer-1"},
+			{ "full": "pics/apt02/apt02-livingroom-02.avif", "alt": "Wohnzimmer-2"},
+			{ "full": "pics/apt02/apt02-livingroom-03.avif", "alt": "Wohnzimmer-3"},
+			{ "full": "pics/apt02/apt02-livingroom-04.avif", "alt": "Wohnzimmer-4"},
+			{ "full": "pics/apt02/apt02-livingroom-05.avif", "alt": "Wohnzimmer-5"},
+			{ "full": "pics/apt02/apt02-livingroom-06.avif", "alt": "Wohnzimmer-6"},
+			{ "full": "pics/apt02/apt02-outside-01.avif", "alt": "Draußen-1"},
+			{ "full": "pics/apt02/apt02-outside-02.avif", "alt": "Draußen-2"},
+			{ "full": "pics/apt02/apt02-upstairs-01.avif", "alt": "Oben-1"}
+		]
+	}
+</script>
 <body>
 	<?php
 		$pageTitle = "Ferienwohnung 2";
 		require_once TEMPLATE_PATH . "header.php";
 	?> 
+
   <main>
     <section class="picture-gallery-section">
 			<div class="pictures-container">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="1">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="2">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="3">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="4">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="5">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="6">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="7">
-				<img src="pics/Haus_page.jpg" data-full="pics/Haus_page.jpg" alt="Haus" class="gallery-item" data-index="8">
+				<img src="pics/apt02/tiles/apt02-bedroom-01-tile.avif" alt="schlafzimmer" class="gallery-item" data-index="1">
+				<img src="pics/apt02/tiles/apt02-livingroom-01-tile.avif" alt="Wohnzimmer" class="gallery-item" data-index="2">
+				<img src="pics/apt02/tiles/apt02-livingroom-02-tile.avif" alt="Wohnzimmer" class="gallery-item" data-index="3">
+				<img src="pics/apt02/tiles/apt02-livingroom-03-tile.avif" alt="Wohnzimmer" class="gallery-item" data-index="4">
+				<img src="pics/apt02/tiles/apt02-kitchen-01-tile.avif" alt="Küche" class="gallery-item" data-index="5">
+				<img src="pics/apt02/tiles/apt02-upstairs-01-tile.avif" alt="Oben" class="gallery-item" data-index="6">
+				<img src="pics/apt02/tiles/apt02-bath-01.avif" alt="Bad" class="gallery-item" data-index="7">
+				<img src="pics/apt02/tiles/apt02-outside-01-tile.avif" alt="Draußen" class="gallery-item" data-index="8">
 			</div>
 			<button id="gallery-more-button" > <strong>Mehr</strong> (8) <span class="plus">&#43</span></button>
 		</section>
@@ -188,7 +212,8 @@
 	</section>
 		<section id="booking-section">
 		<h1>Buchen</h1>
-		<p>Telefon: 0173-8545737 oder </br>
+		<p id="booking-section__p">
+			Telefon: 0173-8545737 oder </br>
 			E-Mail: ferienwohnung@lindenhof-zermuetzel.de
 		</p>
 	</section>

@@ -38,8 +38,18 @@
   font-size: var(--step-calendar);
 }
 .spare{
-  background-color: var(--color-success);
+  /* background-color: var(--color-spare); */
 }
 .occupied{
-  background-color: var(--color-error);
+  background-color: var(--color-next-month);
+}
+.occupied time {
+font-size: 2rem;
+}
+.other-month{
+  /* background-color: var(--color-next-month); */
+  color: var(--color-occupied);
+}
+.other-month time {
+  /* text-decoration: line-through;  */
 }
