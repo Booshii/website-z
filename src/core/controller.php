@@ -22,6 +22,7 @@ class Controller {
       exit();
     }
   }
+
   // Token Functions
   public function validateCsrfToken(): bool {
     $tokenFromPost = $_POST['csrf_token'] ?? null;
@@ -38,9 +39,6 @@ class Controller {
     }
 		return $_SESSION['csrf_token'];
 	}
-
-  // hier noch helper für die csrf tokens 
-  // Frage 
 
   //**********************************************/
   //************** Fewo Functions ****************/
@@ -79,6 +77,7 @@ class Controller {
     if (!$this->validateCsrfToken()) {
       http_response_code(403);
       echo 'Ungültiges CSRF-Token.';
+      return; 
     }
 
     $flat = isset($_POST['submited_flat']) ? (int)$_POST['submited_flat'] : null;
@@ -139,6 +138,7 @@ class Controller {
     if (!$this->validateCsrfToken()) {
       http_response_code(403);
       echo 'Ungültiges CSRF-Token.';
+      return; 
     }
 
     $errors = []; 
@@ -147,10 +147,13 @@ class Controller {
     $email = trim((string)$emailRaw); 
     $password = (string)$passwordRaw;
 
+    // if ($email === '') {
+    //   $errors[] = "Bitte E-Mail eingeben.";
+    // } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //   $errors[] = "Ungültiges E-Mail-Format.";
+    // }
     if ($email === '') {
-      $errors[] = "Bitte E-Mail eingeben.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $errors[] = "Ungültiges E-Mail-Format.";
+      $errors[] = "Bitte einen Username eingeben";
     }
     
     if ($password === '') {
@@ -162,7 +165,8 @@ class Controller {
       return;
     }
 
-    $user_database = $this->repository->getUserByEmail($email); 
+    // email is filled with the username 
+    $user_database = $this->repository->getUserByUsername($email); 
 
     if(!$user_database || !password_verify($password, $user_database['pwd'])) {
       $errors[] = "Ungültige Login-Daten. "; 

@@ -9,8 +9,6 @@
      * */
 
     function renderCalendar(int $month, int $year, array $calendar_events): string{
-        // Eingaben absichern 
-        // gucken dass das vorher wo die Daten aus dem path genommen werden auch passiert
         $month = max(1, min(12, $month));
         $year  = max(1970, min(9999, $year));
         

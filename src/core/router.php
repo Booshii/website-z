@@ -42,7 +42,7 @@ class Router {
 
 	private function ensureSession(): void
 	{
-		if (session_status() !== PHP_SESSION_NONE){
+		if (session_status() === PHP_SESSION_ACTIVE){
 			return;
 		}
 
@@ -50,19 +50,15 @@ class Router {
 		session_name($session_config['name']);
 		session_set_cookie_params([
 			'lifetime' => $session_config['cookie_lifetime'],
+			'path' => '/',
 			'secure' => $session_config['cookie_secure'],
 			'httponly' => $session_config['cookie_httponly'],
 			'samesite' => $session_config['cookie_samesite'],
 		]);
+		
+		ini_set('session.use_strict_mode', '1');
 		session_start(); 
 	}
-	// token validierung und erstellen lieber im Controller
-// private function ensureCsrfToken(): string {
-// 	if (empty($_SESSION['csrf_token'])) {
-// 		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-//   }
-// 	return $_SESSION['csrf_token'];
-// }
 
 	//*****************************************/
   //******* handleRequest Functions *********/

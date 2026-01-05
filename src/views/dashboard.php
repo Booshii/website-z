@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
 		<link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/dashboard.css">
 		<link rel="stylesheet" href="/css/calendar.css">
@@ -66,17 +66,6 @@
 					echo renderCalendar($displayed_month, $displayed_year, $calendar_events);
 				?>
 			</div>
-			<!-- <div id="legend-container">
-            <h1>Legende</h1>
-            <div class="legend-item">
-              <div class="square-green" ></div>
-							<h2>Verfügbar</h2>
-            </div>
-            <div class="legend-item">
-							<div class="square-red" ></div>
-							<h2>Gebucht</h2>
-            </div>
-        </div> -->
 		</div>
 		<div class="form-container">
 			<div class="form-container-head">

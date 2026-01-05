@@ -120,7 +120,7 @@ class Repository{
     if ($month < 1 || $month > 12) {
       throw new InvalidArgumentException("Ungültiger Monat: $month");
     }
-    // Rangefilter für die Suche mit dem zusätzlichen INDEX (idx_calendar_events_1_event_date)
+    // range filter for a search with additional INDEX (idx_calendar_events_1_event_date)
     $start = sprintf('%04d-%02d-01', $year, $month);
     $end = date('Y-m-d', strtotime("$start +1 month"));
     $stmt = $this->db->prepare("SELECT `id`, `event_date`, `description`
@@ -156,19 +156,34 @@ class Repository{
   //**********************************************/
   //************** Login Functions ***************/
   public function getUserByEmail(string $email): ?array {
-      $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `email` = ?"); 
-      if(!$stmt){
-          throw new Exception("Fehler beim Vorbereiten des Statements: " . $this->db->error);          
-      }
-      $stmt->bind_param("s", $email); 
-      $stmt->execute(); 
+    $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `email` = ?"); 
+    if(!$stmt){
+        throw new Exception("Error while prepare statement: " . $this->db->error);          
+    }
+    $stmt->bind_param("s", $email); 
+    $stmt->execute(); 
 
-      $result = $stmt->get_result(); 
-      $user = $result->fetch_assoc(); 
-      $result->free();
-      $stmt->close();
+    $result = $stmt->get_result(); 
+    $user = $result->fetch_assoc(); 
+    $result->free();
+    $stmt->close();
 
-      return $user ?: null; 
+    return $user ?: null; 
+  }
+  public function getUserByUsername(string $username): ?array {
+    $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `username` = ?");
+    if (!$stmt) {
+      throw new Exception("Error while prepare statement: " . $this->db->error);
+    }
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $result->free();
+    $stmt->close();
+    return $user ?: null;
   }
 }
+  
     

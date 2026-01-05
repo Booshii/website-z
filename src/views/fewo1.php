@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="page-id" content="1">
-	<title>FeWo1</title>
+	<title>Lindenhof Ferienwohnung 2</title>
 	<link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/fewo.css">
 	<link rel="stylesheet" href="/css/calendar.css">

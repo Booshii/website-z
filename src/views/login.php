@@ -21,7 +21,7 @@
 		<form id="login-form" action="/login" method="POST">
 			<label for="email">Email</label>
 			<input 
-				type="email" 
+				type="text" 
 				id="email" 
 				name="email" 
 				placeholder="Email" 

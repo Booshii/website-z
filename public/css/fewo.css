@@ -11,7 +11,7 @@ main{
 	flex-direction: column;
 	align-items: center;
 	margin-top: 2rem;
-	margin-bottom: 8rem;
+	margin-bottom: 6rem;
 	gap: clamp(1.5rem, 3vw, 4rem);
 	width: clamp(320px, 90%, 1296px); 
 
@@ -176,8 +176,7 @@ select {
 	font-size: var(--step-2);
 	font-weight: 600;
 	font-family: var(--font-secondary);
-	width: auto;             /* nur so breit wie Inhalt */
-	/* min-width: fit-content; */
+	width: auto;  
 	padding: 0 0.25rem;
 	text-align: center;
 	cursor: pointer;
@@ -283,15 +282,11 @@ select {
 	display: flex;
 }
 #gallery-modal__header{
-    /* position: relative;
-    align-items: center;
-    height: 10%; 
-		  */
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: 10%;  
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 10%;  
 }
 #gallery-modal-close-button {
 	position: absolute;
@@ -319,6 +314,9 @@ select {
 #gallery-modal-image{
 	max-height: 100%;
 }
+.counter {
+  font-family: var(--font-secondary);
+} 
 
 /* ************************************* */
 /* ********* Container Queries ********* */

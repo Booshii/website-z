@@ -1,4 +1,4 @@
 <?php
-$plain = 'leon123';
+$plain = '&67FGDFypyOVm#MBGcgo4sS';
 $hash  = password_hash($plain, PASSWORD_DEFAULT); // inkl. Salt
 echo $hash;

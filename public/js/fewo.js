@@ -25,22 +25,9 @@
   /************* Variables ************** */
   const flat = document.querySelector('meta[name="page-id"]').getAttribute('content'); 
   const baseUrl = new URL("http://localhost/api/events");
-  let currentShownModalImageIndex; // wofür???
+  let currentShownModalImageIndex; 
   let currentIndex;
   let lightboxImagesCache = null;
-  //   { full: "pics/apt01/apt01-bedroom-01.avif", alt: "Schlafzimmer-1"},
-  //   { full: "pics/apt01/apt01-hall-01.avif", alt: "Flur"},
-  //   { full: "pics/apt01/apt01-kitchen-01.avif", alt: "Küche"},
-  //   { full: "pics/apt01/apt01-livingroom-01.avif", alt: "Wohnzimmer-1"},
-  //   { full: "pics/apt01/apt01-livingroom-02.avif", alt: "Wohnzimmer-2"},
-  //   { full: "pics/apt01/apt01-bath-01.avif", alt: "Bad"},
-  //   { full: "pics/apt01/apt01-outside-01.avif", alt: "Draußen-1"},
-  //   { full: "pics/apt01/apt01-upstairs-02.avif", alt: "Oben-2"},
-  //   { full: "pics/apt01/apt01-upstairs-03.avif", alt: "Oben-3"},
-  //   { full: "pics/apt01/apt01-upstairs-01.avif", alt: "Oben-1"},
-  //   { full: "pics/apt01/apt01-outside-03.avif", alt: "Draußen-3"},
-  //   { full: "pics/apt01/apt01-outside-02.avif", alt: "Draußen-2"},
-  // ]
 
 /***************************************** */
 /************ EventListener ************** */
@@ -91,10 +78,6 @@
     selectYear.value = String(year); 
     updateCalendar(month, year, flat); 
   });
-
-
-// hier müssen mit arrow functions noch eingefügt werden 
-// variable anpassen und updateCalendar ausführen 
 
 /***************************************** */
 /************** Functions **************** */

@@ -1,8 +1,21 @@
+#security blocks directory listening 
+Options -Indexes
+
 RewriteEngine On 
 RewriteBase /
+
+# blocks sensitive files with HTTP
+<FilesMatch "^(\.env|\.env\.production|\.env\.example|composer\.(json|lock)|phpunit\.xml|\.git|\.htaccess)$">
+  Require all denied
+</FilesMatch>
+
 #accept loading of actual files and directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 #send everythin else to the index page
 RewriteRule ^ index.php [L,QSA]
+
+
+php_flag log_errors on
+php_value error_log /path/to/webroot/php.log

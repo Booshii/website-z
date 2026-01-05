@@ -15,11 +15,9 @@
 } 
 /* Quadratische Zellen (td.day-box) */
 .calendar td.day-box {
-  position: relative; 
-  /* background: transparent; */
-  
+  position: relative;   
   height: 0;                /* Höhe kommt über ::before */
-  padding: 0;               /* kein zusätzliches Padding */
+  padding: 0;               
 }
 /* erzeugt die quadratische Höhe (Höhe = Breite) */
 .calendar td.day-box::before {
@@ -37,9 +35,6 @@
   font-weight: 600;
   font-size: var(--step-calendar);
 }
-.spare{
-  /* background-color: var(--color-spare); */
-}
 .occupied{
   background-color: var(--color-next-month);
 }
@@ -47,9 +42,5 @@
 font-size: 2rem;
 }
 .other-month{
-  /* background-color: var(--color-next-month); */
   color: var(--color-occupied);
-}
-.other-month time {
-  /* text-decoration: line-through;  */
 }

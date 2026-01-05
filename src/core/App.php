@@ -1,5 +1,5 @@
 <?php
-  
+
 /* ************************************* */
 /* ************* Datenbank ************* */
 /* ************************************* */
@@ -19,8 +19,6 @@
       $this->initServices(); 
     }
     public function initServices(): void {
-      // Beispiel: Datenbankverbindung oder andere Dienste initialisieren
-      // Kann eine Dependency Injection-Logik enthalten
       Database::configure($this->config);
       $this->db = Database::getConnection();
     }
