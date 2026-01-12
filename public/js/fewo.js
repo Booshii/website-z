@@ -24,10 +24,13 @@
 
   /************* Variables ************** */
   const flat = document.querySelector('meta[name="page-id"]').getAttribute('content'); 
-  const baseUrl = new URL("http://localhost/api/events");
+  const baseUrl = new URL("/api/events", window.APP_CONFIG.API_BASE_URL);
   let currentShownModalImageIndex; 
   let currentIndex;
   let lightboxImagesCache = null;
+  const currentDate = new Date();
+  const minYear = currentDate.getFullYear(); 
+  const maxYear = minYear + (selectYear.options.length - 1);
 
 /***************************************** */
 /************ EventListener ************** */
@@ -58,6 +61,12 @@
   prevBtn.addEventListener('click', () => {
     let { month, year } = getYearMonth()
     month --;
+
+    if (month < 1 && year == minYear) {
+      console.log("the year is outside the selectable limits");
+      return;
+    }
+
     if (month < 1) {
       month = 12;
       year--;
@@ -70,6 +79,12 @@
   nextBtn.addEventListener('click', () => {
     let { month, year } = getYearMonth()
     month ++;
+
+    if (month > 12 && year == maxYear) {
+      console.log("the year is outside the selectable limits");
+      return;
+    }
+    
     if (month > 12) {
       month = 1;
       year++;

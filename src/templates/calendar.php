@@ -15,8 +15,11 @@
         $events_by_day = [];
         foreach ($calendar_events as $e) {
             if(!isset($e['event_date'])) continue;
+
             $d = DateTimeImmutable::createFromFormat('!Y-m-d', (string)$e['event_date']);
+
             if(!$d) continue;
+
             $key = $d->format('Y-m-d');
             $events_by_day[$key] = $e;
         }
@@ -60,13 +63,14 @@
             $day_num = (int)$cursor->format('j');
             $is_in_month = ((int)$cursor->format('n')) === $month;
             $is_today = $date_key === $today_key;
-            $has_event = isset($events_by_day[$date_key]);
+            $event_type = $events_by_day[$date_key]['state'] ?? null;
             // $aria_label = $hasEvent 
             //     ? "Tag $dayNum - 1 Ereignis" . ($title !== '' ? ": $title" : "")
             //     : "Tag $dayNum - frei";
             $classes = ['day-box'];
+
             if($is_in_month){
-                $classes[] = $has_event ? 'occupied' : 'spare';
+                $classes[] = $event_type ?? 'spare';
             } else {
                 $classes[] = 'other-month';
             }
@@ -76,7 +80,7 @@
 
             if(in_array('occupied',$classes)) {
                 $day_num = '&#10005;';
-            }
+            } 
 
             $calendar_html .= '<td class="'.implode(' ', $classes).'">';
             $calendar_html .= '<time datetime="'.$date_key.'">'.$day_num.'</time>';

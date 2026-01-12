@@ -35,12 +35,27 @@
   font-weight: 600;
   font-size: var(--step-calendar);
 }
+
+.arrival {
+  background: linear-gradient(
+    to top left,
+    var(--color-occupied) 50%,
+    transparent 50%
+  );
+}
+.departure {
+  background: linear-gradient(
+    to top right,
+    var(--color-occupied) 50%,
+    transparent 50%
+  );
+}
 .occupied{
-  background-color: var(--color-next-month);
+  background-color: var(--color-occupied); 
 }
 .occupied time {
 font-size: 2rem;
 }
 .other-month{
-  color: var(--color-occupied);
+  color: var(--color-next-month);
 }

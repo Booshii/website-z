@@ -12,6 +12,11 @@
 	<link rel="stylesheet" href="/css/global.css">
 	<link rel="stylesheet" href="/css/fewo.css">
 	<link rel="stylesheet" href="/css/calendar.css">
+	<script>	
+		window.APP_CONFIG = {
+			API_BASE_URL: "<?=  htmlspecialchars($config['base_url']) ?>"
+		};
+	</script>
 	<script src="../../js/fewo.js" defer></script>
 	<script src="/js/header.js" defer></script>
 </head>
@@ -108,7 +113,7 @@
 					<div class="equipment-schlafzimmer">
 						<h2>Schlafzimmer</h2>						
 						<ul>
-							<li>160x200m Bett</li>
+							<li>140x200m Bett</li>
 							<li>Bettwäsche</li>
 							<li>Fenster mit Vorhängen</li>
 							<li>Schrank</li>
@@ -119,7 +124,7 @@
 						<ul>
 							<li>über Treppen erreichbar, nicht zum stehen geeignet</li>
 							<li>Aussicht auf den Garten</li>
-							<li>160x200m Matratze</li>
+							<li>140x200m Matratze</li>
 						</ul> 
 					</div>
 					<div class="equipment-terasse">
@@ -181,28 +186,28 @@
 					<h1 class="price-head">PREISE</h1>
 					<div class="summer">
 						<h2>SOMMER</h2>
-						<span class="subheadline">April-September</span>
+						<span class="subheadline">April&ndash;September</span>
 						<p>
 							Preis pro Nacht </br>
-							für 1-4 Personen 85€ </br>
+							für 1&ndash;4 Personen 100€ </br>
 							pro weitere Person +15€
 						</p>
 						<p>
-							Reinigung 55€ </br>
+							Reinigung 45€ </br>
 							Energiekosten lt. Verbrauch </br>
 							Feuerholz Sack 8,50€
 						</p>
 					</div>
 					<div class="winter">
 						<h2>WINTER</h2>
-						<span class="subheadline">Oktober-März</span>
+						<span class="subheadline">Oktober&ndash;März</span>
 						<p>
 							Preis pro Nacht </br>
-							für 1-4 Personen 120€ </br>
-							pro weitere Person +15€
+							für 1&ndash;4 Personen 70€ </br>
+							pro weitere Person +10€
 						</p>
 						<p>
-							Reinigung 55€ </br>
+							Reinigung 45€ </br>
 							Energiekosten lt. Verbrauch </br>
 							Feuerholz Sack 8,50€
 						</p>
