@@ -76,41 +76,84 @@
 			<form action="/controller" method="POST" id="dashboard-form">
 				<input type="hidden" name="submited_flat" value="<?= (int)$displayed_flat?>">																																	
 				<?php 
-					$days = 31; 
+					$days = cal_days_in_month(CAL_GREGORIAN,$displayed_month, $displayed_year); 
 					$event_index = 0;
 					for($i = 1; $i <= $days; $i++){ 
 						$current_date = (new DateTime("$displayed_year-$displayed_month-$i"))->format('Y-m-d');	
-						if( isset($calendar_events[$event_index]) && $current_date === $calendar_events[$event_index]['event_date']) {
-							$description = $calendar_events[$event_index]['description']; 
-							echo'
-								<input type="hidden" name="dates[]" value="' .$current_date. '" >
-								<label for="description' . $i . '" class="label-occupied form-label" id="status-label' . $i . '">' . $i . ' </label>
-								
-								<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
-									<option value=true>Verfügbar</option>
-									<option value=false selected >Belegt</option>
-								</select>
+						if (($calendar_events[$event_index]['event_date'] ?? null) === $current_date) {
+							
 
-								<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
-							'; 
+							$description = $calendar_events[$event_index]['description'];
+							switch ($calendar_events[$event_index]['state'] ?? null) {
+								case 'occupied':
+									echo'
+										<input type="hidden" name="dates[]" value="' .$current_date. '" >
+										<label for="description' . $i . '" class="label-occupied form-label" id="status-label' . $i . '">' . $i . ' </label>
+										
+										<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
+											<option value=spare>Verfügbar</option>
+											<option value=arrival>Anreise</option>
+											<option value=departure>Abreise</option>
+											<option value=occupied selected>Belegt</option>
+										</select>
+										<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
+									';
+									break;
+
+								case 'departure':
+									echo'
+										<input type="hidden" name="dates[]" value="' .$current_date. '" >
+										<label for="description' . $i . '" class="label-departure form-label" id="status-label' . $i . '">' . $i . ' </label>
+										
+										<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
+											<option value=spare>Verfügbar</option>
+											<option value=arrival>Anreise</option>
+											<option value=departure selected>Abreise</option>
+											<option value=occupied>Belegt</option>
+										</select>
+										<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
+									';
+									break;
+
+								case 'arrival': 
+									echo'
+										<input type="hidden" name="dates[]" value="' .$current_date. '" >
+										<label for="description' . $i . '" class="label-arrival form-label" id="status-label' . $i . '">' . $i . ' </label>
+										
+										<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
+											<option value=spare>Verfügbar</option>
+											<option value=arrival selected>Anreise</option>
+											<option value=departure>Abreise</option>
+											<option value=occupied>Belegt</option>
+										</select>
+										<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']" value="' .$description. '" >   
+									';
+									break;
+
+								default:
+									error_log("state of a calendar_event is not a valid enum value or unknown error ");
+									echo "state of a calendar_event is not a valid enum value or unknown error";
+							}
 
 							if ($event_index < count($calendar_events) - 1) {
-									$event_index++;
+								$event_index++;
 							}
+
 						} else {
 							echo'
 								<input type="hidden" name="dates[]" value="' .$current_date. '" >
-
 								<label for="description' . $i . '" class="label-spare form-label" id="status-label' . $i . '">' . $i . ' </label>
-
 								<select name="select_status[' . $current_date . ']" class="form__select" id="select-status_' . $i . '" required>
-									<option value=true>Verfügbar</option>
-									<option value=false>Belegt</option>
+									<option value=spare>Verfügbar</option>
+									<option value=arrival>Anreise</option>
+									<option value=departure>Abreise</option>
+									<option value=occupied>Belegt</option>
 								</select>
-								
 								<input type="text" class="form__input" id="description' . $i . '" name="description[' . $current_date . ']">
 							'; 
-						}
+						}	
+						
+						
 					}
 				?>
 				<input type="hidden" name="csrf_token"
@@ -119,7 +162,7 @@
 			</form>
 			<button type="submit" form="dashboard-form" name="submit_button" class="form-container__button">speichern</button>
 		</div>
-
+		
 	</main>
 </body>
 </html>

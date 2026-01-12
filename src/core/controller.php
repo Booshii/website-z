@@ -49,6 +49,8 @@ class Controller {
     $current_month = date("m");
     $current_year = date("Y");
 
+    $base_url_config = 
+
     $config = $this->config;
     $displayed_flat = $flat; 
     $calendar_events = $this->repository->getOneMonthCalendarEvents($current_year, $current_month, $flat);
@@ -98,25 +100,34 @@ class Controller {
     foreach ($_POST['dates'] as $date) {
       $status = $_POST['select_status'][$date] ?? null;
       $description = $_POST['description'][$date] ?? '';
-      $existingId = $this->repository->getEventByDate($date, $flat);
-      error_log("date: $date ,description $description ,existingId: $existingId ,status: $status");
-      if($existingId === null && $status === "true"){
+      
+      
+      // Wert der beinhaltet wie belgegt ist 
+      $existingEvent = $this->repository->getEventByDate($date, $flat);
+      // if($existingEvent !== null) {
+      //   $existingEventID = $existingEvent['id'];
+      // }
+      error_log("date: $date ,description $description ,existingId: {$existingEvent['id']} ,status: $status");
+
+
+      if($existingEvent === null && $status === "spare"){
         // nothing happens
         continue;
-      } elseif ($existingId === null && $status === "false") {
+      } elseif ($existingEvent === null && $status !== "spare") {
         // CREATE
-        $this->repository->createCalendarEvent($date, $description, $flat);
-      } elseif ($existingId !== null && $status === "false"){
+        $this->repository->createCalendarEvent($date, $status, $description, $flat);
+      } elseif ($existingEvent !== null && $status !== "spare"){
         // UPDATE
-        $this->repository->updateCalendarEvent($existingId, $date, $description, $flat);
-      } elseif ($existingId !== null && $status === "true"){
+        $this->repository->updateCalendarEvent($existingEvent['id'], $date, $status, $description, $flat);
+      } elseif ($existingEvent !== null && $status === "spare"){
         // DELETE
-        $this->repository->deleteCalendarEvent($existingId, $flat);
+        $this->repository->deleteCalendarEvent($existingEvent['id'], $flat);
       } else {
         error_log("Fehler beim Verarbeiten von Datum $date");
         echo "Keine Änderung festgestellt oder unbekannter Fall bei Datum: $date<br>";
       }
     };
+
     // get month and year for redirect 
     $firstDate = $_POST['dates'][0] ?? date('Y-m-d');
     $year  = date('Y', strtotime($firstDate));

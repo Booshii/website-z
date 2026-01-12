@@ -130,6 +130,12 @@ main{
 .label-occupied {
   background-color: var(--color-error);
 }
+.label-arrival {
+  background-color: var(--color-tertiary);
+}
+.label-departure {
+  background-color: var(--color-tertiary);
+}
 
 /* ********** select *********** */
 .form__select {

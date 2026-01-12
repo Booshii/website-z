@@ -19,14 +19,14 @@ class Repository{
   //**********************************************/
   //************** Envent Functions **************/
   //******** create event  ********/
-  public function createCalendarEvent(string $date, string $description, int $flat): int|false{
+  public function createCalendarEvent(string $date, string $state, string $description, int $flat): int|false{
     $table = $this->tableForFlat((int)$flat);
     
-    $stmt = $this->db->prepare("INSERT INTO $table (`event_date`, `description`) VALUES (?, ?)");
+    $stmt = $this->db->prepare("INSERT INTO $table (`event_date`, `state`, `description`) VALUES (?, ?, ?)");
     if (!$stmt) { 
       throw new Exception("Fehler beim Vorbereiten des Statements: " . $this->db->error);
     }
-    $stmt->bind_param('ss', $date, $description);
+    $stmt->bind_param('sss', $date, $state, $description);
 
     if ($stmt->execute()){
       $insertId = $this->db->insert_id;
@@ -39,14 +39,14 @@ class Repository{
   }
 
   //******** update event  ********/
-  public function updateCalendarEvent(int $id, string $date, string $description, int $flat): int|false {
+  public function updateCalendarEvent(int $id, string $date, string $state, string $description, int $flat): int|false {
     $table = $this->tableForFlat((int)$flat);
       
-    $stmt = $this->db->prepare("UPDATE $table SET `event_date` = ?, `description` = ? WHERE `id` = ?"); 
+    $stmt = $this->db->prepare("UPDATE $table SET `event_date` = ?,`state` = ?,`description` = ? WHERE `id` = ?"); 
     if (!$stmt) { // prepare()-Fehlerbehandlung
       throw new Exception("Fehler beim Vorbereiten des Statements: " . $this->db->error);
     }
-    $stmt->bind_param('ssi', $date, $description, $id); 
+    $stmt->bind_param('sssi', $date, $state, $description, $id); 
 
     $ok = $stmt->execute();
     $affected_rows = $stmt->affected_rows;
@@ -71,8 +71,8 @@ class Repository{
 
     return $ok ? $affected_rows : false;
   }
-
-  //******* get event by id *******/
+  //******** read event  ********/
+  //******* get by id *******/
   public function getEventById(int $id, int $flat): ?array {
     $table = $this->tableForFlat((int)$flat);
     
@@ -90,11 +90,11 @@ class Repository{
     return $row ?: null;
   }
 
-  //****** get event by date ******/
-  public function getEventByDate(string $date, int $flat): ?int {
+  //****** get by date ******/
+  public function getEventByDate(string $date, int $flat): ?array {
     $table = $this->tableForFlat((int)$flat);
 
-    $stmt = $this->db->prepare("SELECT `id` FROM $table WHERE `event_date` = ?");
+    $stmt = $this->db->prepare("SELECT * FROM $table WHERE `event_date` = ?");
     if (!$stmt) {
       throw new Exception("Fehler beim Vorbereiten des Statements: " . $this->db->error);
     }
@@ -106,10 +106,10 @@ class Repository{
     $res->free();
     $stmt->close();
 
-    return $row['id'] ?? null;
+    return $row ?? null;
   }
 
-  //**** get events one month  ****/
+  //**** get one month  ****/
   public function getOneMonthCalendarEvents(int $year, int $month, int $flat): array{    
     $table = $this->tableForFlat((int)$flat);
     $year  = (int)$year;
@@ -123,7 +123,7 @@ class Repository{
     // range filter for a search with additional INDEX (idx_calendar_events_1_event_date)
     $start = sprintf('%04d-%02d-01', $year, $month);
     $end = date('Y-m-d', strtotime("$start +1 month"));
-    $stmt = $this->db->prepare("SELECT `id`, `event_date`, `description`
+    $stmt = $this->db->prepare("SELECT `id`, `event_date`, `state`, `description`
                                 FROM $table
                                 WHERE `event_date` >= ? AND `event_date` < ?
                                 ORDER BY `event_date` ASC"); 
@@ -140,10 +140,10 @@ class Repository{
 
     return $events; 
   }
-  //******* get all events ********/
+  //******* get all ********/
   public function getAllEvents(int $flat): array {
     $table = $this->tableForFlat((int)$flat);
-    $stmt = $this->db->query("SELECT `id`, `event_date`, `description` FROM $table 
+    $stmt = $this->db->query("SELECT `id`, `event_date`, `state`, `description` FROM $table 
                               ORDER BY `event_date` ASC");
     if (!$stmt) {
       throw new Exception("Fehler bei der Abfrage: " . $this->db->error);

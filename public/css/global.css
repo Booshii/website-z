@@ -63,8 +63,8 @@
   --color-error:   #dc3545; /* für Fehlermeldungen, belegte Tage */
 
   --color-spare: #deddda;
-  --color-occupied: #606266;
-  --color-next-month: #deddda;
+  --color-occupied: #deddda;
+  --color-next-month: #606266;
 
   /* --global-font: Courier New;  */
   --font-primary: "AmaticSC", Arial, sans-serif;

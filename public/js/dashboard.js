@@ -35,8 +35,10 @@
         const id = select.id.split('_').pop(); // splittet vor und nach _
         const label  = document.getElementById('status-label' + id); 
         if (!label) return; 
-        label.classList.toggle('label-occupied', select.value !== 'true');
-        label.classList.toggle('label-spare',    select.value === 'true');
+        label.classList.toggle('label-occupied', select.value === 'occupied');
+        label.classList.toggle('label-spare',    select.value === 'spare');
+        label.classList.toggle('label-arrival',    select.value === 'arrival');
+        label.classList.toggle('label-departure',    select.value === 'departure');
       });
   });
 
