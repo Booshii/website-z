@@ -189,13 +189,12 @@
 						<span class="subheadline">April&ndash;September</span>
 						<p>
 							Preis pro Nacht </br>
-							für 1&ndash;4 Personen 100€ </br>
-							pro weitere Person +15€
+							für 1&ndash;3 Personen 100€ </br>
 						</p>
 						<p>
 							Reinigung 45€ </br>
 							Energiekosten lt. Verbrauch </br>
-							Feuerholz Sack 8,50€
+							Feuerholz kleiner Sack 8,50€
 						</p>
 					</div>
 					<div class="winter">
@@ -203,13 +202,12 @@
 						<span class="subheadline">Oktober&ndash;März</span>
 						<p>
 							Preis pro Nacht </br>
-							für 1&ndash;4 Personen 70€ </br>
-							pro weitere Person +10€
+							für 1&ndash;3 Personen 70€ </br>
 						</p>
 						<p>
 							Reinigung 45€ </br>
 							Energiekosten lt. Verbrauch </br>
-							Feuerholz Sack 8,50€
+							Feuerholz kleiner Sack 8,50€
 						</p>
 					</div>
 				</div>

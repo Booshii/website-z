@@ -201,7 +201,7 @@
 					<p>
 						Reinigung 60€ </br>
 						Energiekosten lt. Verbrauch </br>
-						Feuerholz Sack 8,50€
+						Feuerholz kleiner Sack 8,50€
 					</p>
 				</div>
 				<div class="winter">
@@ -215,7 +215,7 @@
 					<p>
 						Reinigung 60€ </br>
 						Energiekosten lt. Verbrauch </br>
-						Feuerholz Sack 8,50€
+						Feuerholz kleiner Sack 8,50€
 					</p>
 				</div>
 			</div>

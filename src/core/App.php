@@ -1,4 +1,11 @@
 <?php
+// ===================================================
+// HEAD-REQUEST: buffer Output, that no body is
+// send to the client (only Header & Status)
+// ===================================================
+  if ($_SERVER['REQUEST_METHOD'] === 'HEAD') {
+      ob_start();
+  }
 
 /* ************************************* */
 /* ************* Datenbank ************* */
@@ -33,6 +40,14 @@
   // App initialisieren und starten 
   $app = new App($config);
   $app->run(); 
+
+// ===================================================
+// HEAD-REQUEST: throw buffered output,
+// Header & Status be preserved
+// ===================================================
+  if ($_SERVER['REQUEST_METHOD'] === 'HEAD') {
+      ob_end_clean();
+  }
   
 ?> 
 

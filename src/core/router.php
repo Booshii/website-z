@@ -37,6 +37,12 @@ class Router {
 				$allowedMethods[] = $httpMethod;
 			}
 		}
+		// if GET is allowed HEAD should be allowed to 
+		// add HEAD to the allowedMethods if GET is allowed 
+		if (in_array('GET', $allowedMethods, true) && !in_array('HEAD', $allowedMethods, true)) {
+			$allowedMethods[] = 'HEAD';
+		}
+
 		return $allowedMethods;
 	}
 
@@ -67,6 +73,10 @@ class Router {
 		$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? "/", PHP_URL_PATH);    
 		$requestUri = rtrim($requestUri, '/') ?: '/';  
 		$method = $_SERVER['REQUEST_METHOD']; 
+
+		if($method === 'HEAD') {
+			$method = 'GET';
+		}
 
 		if(!isset($this->routes[$method][$requestUri])) {
 			$allowedMethods = $this->allowedMethodsForPath($requestUri);
